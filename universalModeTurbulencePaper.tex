@@ -95,7 +95,7 @@ with magnetic shear, kinetic electrons and ions,
 weak collisions,
 and a density gradient, but with no temperature gradient.
 In contrast to hydrodynamic examples of non-modal growth and subcritical turbulence,
-here there is not sheared flow in the equilibrium.
+here there is no sheared flow in the equilibrium.
 Significant transient linear amplification
 is found when the magnetic shear and collisionality are weak.
 It is also demonstrated that nonlinear turbulence can be sustained if initialized
@@ -225,7 +225,7 @@ dropping toroidal effects:
 =
 \frac{q_s}{T_s} f_{Ms} \frac{\partial \left<\Phi\right>_{\vect{R}_s}}{\partial t}
 -\frac{f_{Ms}}{B L_n} \frac{\partial \left< \Phi\right>_{\vect{R}_s}}{\partial Y_s}
-\left[ 1 + \left( \energy-\frac{3}{2}\right) \eta_s\right]
+\left[ 1 + \left( \energy_s-\frac{3}{2}\right) \eta_s\right]
 \nonumber
 \end{eqnarray}
 together with the quasineutrality condition
@@ -236,10 +236,10 @@ together with the quasineutrality condition
 \label{eq:qn}
 \end{equation}
 Here $s \in \left\{i,e\right\}$ subscripts denote species,
-$\Phi(t,\vect{r})$ is the electrostatic potential, $h_s(t,\vect{R}_s,\energy,\mu)$ is the nonadiabatic distribution function,
-$\energy = v^2/2$, $\mu = v_{\bot}^2/(2B)$,
+$\Phi(t,\vect{r})$ is the electrostatic potential, $h_s(t,\vect{R}_s,\energy_s,\mu)$ is the nonadiabatic distribution function,
+$\energy_s = m_s v^2/(2 T_s)$, $\mu = v_{\bot}^2/(2B)$,
 and $f_{Ms}$ is the leading-order Maxwellian.
-The scale length of the equilibrium density $n$ is $L_n = -(1/n)(dn/dx)$,
+The scale length of the equilibrium density $n$ is $L_n = -n/(dn/dx)$,
 $q_i = e = -q_e$ is the proton charge,
 $T_s$ is the species temperature,
 $C_s$ is the collision operator,
@@ -248,7 +248,7 @@ $\left<\right>_{\vect{R}_s}$ and $\left<\right>_{\vect{r}}$ denote
 gyroaverages at fixed particle position $\vect{r}=(x,y,z)$ and guiding-center position $\vect{R}_s=(X_s,Y_s,Z_s)$.
 The distinction between $z$ and $Z_s$ may be neglected.
 Expanding the fluctuating quantities in spatial Fourier modes as $\Phi = \sum_{k_x,k_y} \Phi_{k_x,k_y}(t,z) \exp(i k_x x + i k_y y)$
-and $h_s = \sum_{k_x,k_y} h_{s,k_x,k_y}(t,z,\energy,\mu) \exp(i k_x X_s + i k_y Y_s)$,
+and $h_s = \sum_{k_x,k_y} h_{s,k_x,k_y}(t,z,\energy_s,\mu) \exp(i k_x X_s + i k_y Y_s)$,
 we may replace the gyro-averages with Bessel functions:
 $\left<\Phi_{k_x,k_y} \exp(i k_x x + i k_y y)\right>_{\vect{R}_s}
 =J_{0s} \Phi_{k_x,k_y} \exp(i k_x X_s + i k_y Y_s)$
@@ -277,7 +277,7 @@ One important property of the system (\ref{eq:gke})-(\ref{eq:qn})
 is the free energy conservation equation \cite{Howes, AbelReview}
 obtained from the $\sum_s \int d^3R_s \int d^3v (T_s h_s/f_{Ms}) (\ldots)$ moment of (\ref{eq:gke}):
 \begin{equation}
-\frac{d W}{d t} = S(\Phi,h_i,h_e)
+\frac{d W}{d t} = S(h_i,h_e)
 \label{eq:dWdt}
 \end{equation}
 where
@@ -290,13 +290,13 @@ function from a Maxwellian,
 and
 \begin{eqnarray}
 \label{eq:freeEnergySources}
-S(\Phi,h_i,h_e)
+S(h_i,h_e)
 &=&
 \sum_s \int d^3r \int d^3v \frac{T_s h_s}{f_{Ms}}  C_s\{ h_s \}  \\
 &&+\sum_s
 \int d^3R_s \int d^3v \frac{h_s}{B} \frac{\partial \left< \Phi\right>_{\vect{R}_s}}{\partial Y_s}
  \frac{T_s}{n_s}\frac{dn_s}{dx}
-\left[ 1 + \left( \energy-\frac{3}{2}\right) \eta_s\right]
+\left[ 1 + \left( \energy_s-\frac{3}{2}\right) \eta_s\right]
 \nonumber
 \end{eqnarray}
 is the net energy source.
@@ -331,8 +331,8 @@ driven by the density gradient.
 For reference, the growth rates and frequencies of this instability
 in the absence of magnetic shear are given in Appendix \ref{appendix:zeroShear}.
 As this instability is stabilized for $k_y \rho_i \ll 1$ when even a small amount of magnetic shear
-is introduced \cite{Ross, Tsang}, we might expect that this system can exhibit transient linear amplification, with an amount of
-amplification that tends to infinity as the magnetic shear tends to zero.  In this way, the apparently singular limit
+is introduced \cite{Ross, Tsang}, we might expect that this system can exhibit transient linear amplification, with
+the number of $e$-foldings of amplification tending to infinity as the magnetic shear tends to zero.  In this way, the apparently singular limit
 of zero shear may be seen as a continuous limit of the general shear case.
 
 
@@ -351,7 +351,7 @@ Collisions are also included to eliminate absolute instability for $k_y \rho_i \
 as discussed in \cite{usUniversalInstability},
 using the collision operators detailed in Ref. \cite{Abel}.
 As transient amplification generally depends on the choice
-of norm, here we compare three reasonable (squared) norms: $W$, $\int dz |\Phi|^2$,
+of norm, here we compare three reasonable quadratic norms: $W$, $\int dz |\Phi|^2$,
 and the maximum of $|\Phi|^2$ along $z$.
 The curve for each norm is scaled by a constant so the initial amplitude is 1.
 Amplification by several orders of magnitude is observed in all norms
@@ -514,7 +514,8 @@ are the 2D Fourier contributions to $W = \sum_{k_x,k_y} W_{k_x,k_y}$.
 Here,
 $L_x$ and $L_y$ are the sizes of the simulation domain in $x$ and $y$,
 and $\delta\! f_s =\sum_{k_x,k_y} \delta\! f_{s,k_x,k_y} \exp( i k_x x+i k_y y)$.
-Curves for the other $k_x$ in the simulation look similar to those in figure \ref{fig:linearBox}.
+Curves for the other $k_x$ in the simulation look similar to those in figure \ref{fig:linearBox},
+as expected from the $z$-translation symmetry of the system (\ref{eq:gke})-(\ref{eq:qn}); see discussion following (\ref{eq:kperp}).
 The amplitude of each
 of these curves decreases for large $t$, confirming there is no instability for these physical and
 numerical parameters.  The decrease is mostly monotonic, but there is typically a small
@@ -528,7 +529,7 @@ One noteworthy linear property apparent in figure \ref{fig:linearBox}
 is that damping of modes with $k_y=0$ is very weak,
 nearly invisible on the scale of the figure.
 Linear modes with $k_y=0$ and $\partial/\partial z=0$ are damped only by collisions.
-(In the absence of any collisions, any $h_e$ and $h_i$ that depend only on $\energy$ and $\mu$ are steady-state solutions of the linearized system.)
+(In the absence of any collisions, any $h_e$ and $h_i$ that depend only on $\energy_s$ and $\mu$ are steady-state solutions of the linearized system.)
 Collisions introduce damping of these $k_y=0$ modes, with a damping rate that increases with $k_x^2$ due to the classical transport terms in the gyroaveraged collision operator.
 
 
@@ -562,7 +563,7 @@ demonstrating nonlinear instability.
 
 A variety of strategies can be used to initiate the nonlinear instability in numerical simulations.
 Large-amplitude noise can be used, but this method is numerically inconvenient (at least in gs2) due to the rapid
-drop in amplitude over the first few timesteps due to strongly damped modes,
+drop in amplitude of strongly damped modes over the first few timesteps,
 which causes significant changes in the CFL-stable timestep associated
 with the perpendicular $\vect{E}\times\vect{B}$ speed,
 thereby requiring recomputation of the implicit time-advance operator.
@@ -595,7 +596,7 @@ Simulations for exactly the same physical and numerical parameters as the decayi
 linear simulation in figure (\ref{fig:linearBox}), but now including nonlinearity and varying the
 initial amplitude of the $k_y=0.1$ component.
 (a) When the initial amplitude is sufficient, turbulence grows and is sustained, whereas (b) for small initial amplitude,
-all modes decay as in a linear simulation.
+all modes decay as they do in a linear simulation.
 \label{fig:amplitudeDependence}}
 \end{figure}
 
@@ -683,27 +684,26 @@ argument that relies less on linear algebra.
 For this discussion, it is useful to define a ``2D mode'' to be any structure with given $k_x$ and $k_y$,
 but with no restriction on the $z$ dependence.
 
-{\it Statement 1:} Consider a solution of the nonlinear system (\ref{eq:gke})-(\ref{eq:qn})
-for which $W$ in (\ref{eq:W}) is not monotonically decreasing, and choose any
- time $t_0$ during which the free energy satisfies $dW/dt>0$.
-(In sustained turbulence, where $W$ fluctuates about some mean value,
-this condition must be satisfied some of the time.)  Suppose at $t_0$ we turn
-off the nonlinear term
-and evolve the system in time, as in figure \ref{fig:linearRestart}.
-Then at least one 2D mode must grow linearly in the $W$ norm
-for at least some time, i.e. there must be transient linear amplification.
+{\it Statement 1:} Consider a turbulent solution of the nonlinear gyrokinetic system (\ref{eq:gke})-(\ref{eq:qn}),
+i.e. a solution for which $W$ does not decay to zero at large $t$.
+Choose any time $t_0$ at which the free energy satisfies $dW/dt>0$.
+Suppose at $t_0$ we turn off the nonlinear term
+and re-evolve the system in time, as in figure \ref{fig:linearRestart}.
+Then at least one 2D mode must grow in the $W$ norm
+for some time following $t_0$, i.e. there must be transient linear amplification.
 
 {\it Proof:}
 Recall that (\ref{eq:dWdt}) is a moment of both the nonlinear and linear dynamical equations.
-When the nonlinear term is turned off at $t_0$, $S(\Phi,h_i,h_e)$ does not immediately change, because
+When the nonlinear term is turned off at $t_0$, $S(h_i,h_e)$ does not immediately change, because
 the system state does not immediately change. Therefore, $dW/dt$ must vary \emph{continuously}
-when the nonlinear term is turned off, and so $dW/dt$ is positive at $t_0$ under the linear dynamics.
+when the nonlinear term is turned off, and so $dW/dt$ is positive for some period followiwng $t_0$ under the 
+action of the linear dynamics.
 Recall $W$ is a sum of positive contributions (\ref{eq:Wk}) from each 2D mode:
 $W = \sum_{k_x,k_y} W_{k_x,k_y}$.
 Therefore $dW_{k_x,k_y}/dt$ must be positive in the linear dynamics for at least one 2D mode,
 so this mode must be growing transiently in the $W$ norm.
 
-Roughly speaking, the upshot of this argument is that we should not be surprised there is transient amplification
+Roughly speaking, the upshot of this argument is that we should not be surprised that there is transient amplification
 after the nonlinear term is turned off in figure (\ref{fig:linearRestart}).
 Such amplification \emph{must} occur.
 Put another way, a necessary condition
@@ -711,18 +711,19 @@ for turbulence (in the absence of linear instability) is that typical states of 
 can be transiently amplified. Furthermore, the energy growth in the 2D modes that are amplified
 must be sufficient to balance the energy decay from the damped 2D modes.
 
-Next, we present a more algebraic argument for the necessity of transient amplification, closely
-following \cite{DelSoleNecessity}.  For this second approach, we let $\vect{h}$ denote
+Next, we present a second argument for the necessity of transient amplification.
+This argument is based on linear algebra and closely follows \cite{DelSoleNecessity}.  
+For this second approach, we let $\vect{h}$ denote
 a column vector that specifies the state of the system $\{h_i,h_e\}$ in some convenient basis.
 For example, $\vect{h}$ could represent the array of values specifying the distribution function in a code.
 
-{\it Statement 2:} Given physical parameters for which
-the system (\ref{eq:gke})-(\ref{eq:qn})
+{\it Statement 2:} Given a set of physical parameters for which
+the nonlinear gyrokinetic system (\ref{eq:gke})-(\ref{eq:qn})
 permits statistically steady turbulence,
-there must exist a state $\vect{h}_0$ such that
-(1) $dW/dt>0$ at $t=0$ when the system is evolved from $\vect{h}_0$, and
-(2) the turbulent state $\vect{h}(t)$ has a nonzero average projection
-onto $\vect{h}_0$.
+there exists at least one state $\vect{h}_0$ such that
+(1) $dW/dt>0$ if $\vect{h} = \vect{h}_0$, and
+(2) the squared projection of the turbulent state $\vect{h}(t)$ 
+onto $\vect{h}_0$, defined below, has a non-zero average.
 
 {\it Proof:}
 Let $\vect{L}$ denote the time-independent linear operator associated with (\ref{eq:gke})-(\ref{eq:qn})
@@ -765,7 +766,8 @@ In the hydrodynamics literature, the eigenvectors $\vect{u}_k$ are sometimes cal
 instantaneous optimals; the $\vect{u}_j$ with maximum $\lambda_j$ is the fluctuation
 that maximizes the instantaneous $dW/dt$.
 We may decompose the state vector in the $\vect{u}_j$ basis:
-$\vect{h}(t) = \sum_j a_j(t) \vect{u}_j$ for some amplitudes $a_j(t)$. Then
+$\vect{h}(t) = \sum_j a_j(t) \vect{u}_j$ for some amplitudes $a_j(t)$. 
+Using this decomposition in (\ref{eq:avg}) gives
 \begin{equation}
 \label{eq:sum}
 \sum_j \lambda_j \left< \left| a_j(t) \right|^2 \right>
@@ -837,7 +839,7 @@ even when all linear modes are damped.
 This phenomenon had been seen previously
 in fluid models \cite{Scott1, Scott2, Drake}.
 This phenomenon, clearly visible in figure \ref{fig:amplitudeDependence},
-is opposite to the ``Dimits shift'' seen at different physical parameters,
+is opposite to the ``Dimits shift'' \cite{Dimits} seen at different physical parameters,
 in which nonlinear fluctuations
 are suppressed despite the presence of linear instability.
 
