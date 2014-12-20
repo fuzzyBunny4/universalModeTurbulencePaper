@@ -158,7 +158,8 @@ The oscillation is electrostatic in nature, and linear instability can indeed be
 in slab geometry without magnetic shear or temperature gradients.
 It was later established that when any amount of magnetic shear is included in the model,
 no matter how small,
-the eigenmodes become linearly damped for $k_y \rho_i \ll 1$
+the eigenmodes become linearly damped for $k_y \rho_i \ll 1$,
+where $k_y$ is the perpendicular wavenumber and $\rho_i$ is the ion gyroradius
 \cite{Ross, Tsang, Antonsen}.
 However, instability can persist at $k_y \rho_i \ge 1$ when the collisionality is
 very low \cite{usUniversalInstability}.
@@ -262,9 +263,10 @@ k_{\perp} = \sqrt{k_y^2 + (k_x - k_y z/L_s)^2}.
 \label{eq:kperp}
 \end{equation}
 The system is uniquely specified by the following dimensionless parameters:
-$L_s / L_n$, $\eta_i$, $\eta_e$, $T_e / T_i$, and $k_y \rho_i \nu_{ee} / \omega_*$,
-where $\nu_{ee} = \sqrt{2}\pi n e^4 \ln\Lambda/[(4\pi\epsilon_0)^2 m_e^{1/2} T_e^{3/2}]$ is the electron-electron collision frequency,
-and $\omega_* = k_y T_e/(e B L_n)$ is the electron drift frequency.
+$L_s / L_n$, $\eta_i$, $\eta_e$, $T_e / T_i$, and collisionality $\nuee L_n / v_i$,
+where $\nuee = \sqrt{2}\pi n e^4 \ln\Lambda/[(4\pi\epsilon_0)^2 m_e^{1/2} T_e^{3/2}]$ is the electron-electron collision frequency
+and $v_i = \sqrt{2 T_i / m_i}$.
+%and $\omega_* = k_y T_e/(e B L_n)$ is the electron drift frequency.
 
 Notice that the parallel coordinate $z$ enters the system (\ref{eq:gke})-(\ref{eq:kperp}) only through (\ref{eq:kperp}).
 Also notice $k_x$ enters the system (\ref{eq:gke})-(\ref{eq:kperp}) only through (\ref{eq:kperp}) and through the nonlinear term in (\ref{eq:gke}).
@@ -343,10 +345,10 @@ Turning now to linear initial-value simulations,
 we indeed find that significant transient linear amplification is possible for certain parameters.
 Figure \ref{fig:transientAmplification}.a illustrates
 a linear computation for a single $(k_x,k_y)$ in a case of very weak magnetic shear, $L_s / L_n = 300$.
-Other parameters used are $k_y \rho_i = 1$, $\nu_{ee} / \omega_* = 0.1$,
+Other parameters used are $k_y \rho_i = 1$ (where  $\rho_i = v_i / \Omega_i$), $\nuee L_n / v_i = 0.05$,
 $m_i = 3672 m_e$,
-$T_e = T_i$, and $\eta_i = \eta_e = 0$;
-the results are independent of $k_x$ as noted previously.
+$T_e = T_i$, and $\eta_i = \eta_e = 0$.
+The results are independent of $k_x$ up to a translation in $z$, as noted previously.
 Collisions are also included to eliminate absolute instability for $k_y \rho_i \ge 0.7$,
 as discussed in \cite{usUniversalInstability},
 using the collision operators detailed in Ref. \cite{Abel}.
@@ -388,7 +390,7 @@ for a directly calculated optimal initial condition.
 \includegraphics[width=3in]{m20141121_01_plotGS2TransientAmplificationForPaper_figuresBC_b.pdf}
 \includegraphics[width=3in]{m20141121_01_plotGS2TransientAmplificationForPaper_figuresBC_c.pdf}
 \caption{(Color online) (a) Linear evolution for $L_s/L_n=300$, $\eta_i = \eta_e = 0$,
-$\nu_{ee} = 0.1 \omega_*$, and $k_y \rho_i = 1$, illustrating transient amplification in three norms.
+$\nuee = 0.05 v_i/L_n$, and $k_y \rho_i = 1$, illustrating transient amplification in three norms.
 The initial conditions are detailed in the main text.
 (b) The amount of transient amplification may be defined relative to $t=0$ or relative
 to the minimum that occurs shortly thereafter.
@@ -425,7 +427,7 @@ of the amplification factor on $k_y$ at fixed $L_s/L_n = 200$.
 Significant amplification can be observed for a range of $k_y$ surrounding
 $1/\rho_i$.
 Results are shown for two values of collisionality,
-$\nuee k_y \rho_i / \omega_*= 0.2$ and 1.
+$\nuee L_n / v_i = 0.1$ and $0.5$.
 (When the collisionality is much smaller than these values,
 absolute linear instability is present \cite{usUniversalInstability}.)
 It can be seen that increasing collisionality tends to limit amplification
@@ -457,7 +459,7 @@ which is not associated with entropy-producing collisions.
 \caption{(Color online) The (a) number of $e$-foldings of transient amplification and (b)
 duration of the amplification both scale with the magnetic shear length scale $L_s$,
 consistent with the appearance of absolute instability in the limit of vanishing shear ($L_s \to \infty$).
-Parameters used are $k_y \rho_i = 2$ and $\nu_{ee} = 0.1 \omega_*/(k_y \rho_i)$.
+Parameters used are $k_y \rho_i = 2$ and $\nuee = 0.05 v_i / L_n$.
 \label{fig:transientAmplificationVsLsOverLn}}
 \end{figure}
 
@@ -477,7 +479,7 @@ Parameters used are $k_y \rho_i = 2$ and $\nu_{ee} = 0.1 \omega_*/(k_y \rho_i)$.
 %\includegraphics[width=3in]{m20140728_01_plotTransientAmplificationKyScans.pdf}
 \caption{(Color online) Transient amplification can be observed
 for a range of $k_y$ surrounding $1/\rho_i$.  For this figure, $L_s/L_n=200$.
-The two collisionalities shown are $\nuee k_y \rho_i/\omega_* = 0.2$ and 1.
+The two collisionalities shown are $\nuee L_n / v_i = 0.1$ and $0.5$.
 \label{fig:transientAmplificationVsKy}}
 \end{figure}
 
@@ -490,7 +492,7 @@ We now demonstrate that when the nonlinear term in (\ref{eq:gke})
 is retained, sustained turbulence is possible
 in this system.
 For the demonstration here we consider
-the parameters $L_s/L_n = 20$, $T_e = T_i$, $m_i = 3672 m_e$, $\eta_i = \eta_e = 0$, and $\nu_{ee} k_y \rho_i / \omegase = 0.1$.
+the parameters $L_s/L_n = 20$, $T_e = T_i$, $m_i = 3672 m_e$, $\eta_i = \eta_e = 0$, and $\nuee L_n / v_i = 0.05$.
 We find this point in parameter-space is approximately on the edge of where sustained turbulence
 is possible: if the magnetic shear or collisionality is increased much beyond these values,
 turbulence cannot be sustained indefinitely (though it may persist for a finite time.)
@@ -640,33 +642,47 @@ The particle and heat fluxes for a long nonlinear simulation at these parameters
 As the time average of $S$ in (\ref{eq:dWdt})-(\ref{eq:freeEnergySources}) must vanish, and since the collision term
 is negative-definite, there must be an average particle flux in the appropriate direction
 to relax the equilibrium density gradient, and indeed we find such a flux.
-Although there is no equilibrium temperature gradient, significant fluxes
+Although there is no equilibrium temperature gradient, nonzero average fluxes
 of both ion and electron heat are found.  Both heat fluxes have the same sign
 as the particle flux, meaning heat flows in the $-\nabla n$ direction.
 
+The fluxes in figure \ref{fig:fluxes} are normalized by gyro-Bohm values defined using the length $L_n$ and including the 2 in the thermal speed, e.g.
+the particle flux is normalized by $(\rho_i / L_n)^2 n v_i$.
+%Using the amplitude of the normalized particle flux from figure \ref{fig:fluxes},
+Converting to dimensional units for a deuterium plasma, we obtain the following estimate for the turbulent particle diffusivity:
+$D \approx \left( 0.4 \mathrm{ \;m^2/s}\right)
+\left(T / 500 \mathrm{\;eV}\right)^{3/2}
+\left(B/2\mathrm{\;T}\right)^{-2} \left( L_n / 1 \mathrm{\;cm}\right)^{-1}$.
+This magnitude of diffusion coefficient may be large enough to be of interest experimentally.
+A larger diffusion coefficient is obtained if $L_s/L_n$ is increased.
+
 \begin{figure}[h!]
+% Runs on edison in
+% /global/scratch2/sd/landrema/20141112-01-coderunner-edison-subcritical-box-lowLsOverLn
+% Figure generated by first running
+% m20141215_02_plotGS2_extractFluxesVsTimeForPaper.m on edison,
+% then running
+% m20141210_01_plotGs2FluxesVsTimeForPaper.m
+% on my laptop
+%------------------------------------------
+% Old version of figure:
 % Runs on edison in
 % /global/scratch2/sd/landrema/20140730-01-coderunner-edison-subcritical-box
 % Figure generated by first running
 % m20140807_01_plotGS2_extractFluxesVsTimeForPaper.m on edison,
 % then running
 % m20140807_01_plotFluxesVsTimeForPaper.m on my laptop.
-\includegraphics[width=3in]{m20140807_01_plotFluxesVsTimeForPaper.pdf}
+\includegraphics[width=3in]{m20141210_01_plotGs2FluxesVsTimeForPaper.pdf}
+%\includegraphics[width=3in]{m20140807_01_plotFluxesVsTimeForPaper.pdf}
 %\includegraphics[width=3in]{fluxes.png}
 \caption{(Color online)
-Even in the absence of equilibrium temperature gradients, ion and electron heat fluxes
+Fluxes for the simulation of Figure (\ref{fig:amplitudeDependence}).a with  $\nuee L_n / v_i = 0.05$ and
+$L_s/L_n=20$, approximately the maximum shear at which turbulence can be sustained at this collisionality.
+Even in the absence of equilibrium temperature gradients, nonzero average ion and electron heat fluxes
 are obtained.
 \label{fig:fluxes}}
 \end{figure}
 
-Using the amplitude of the normalized particle flux from figure \ref{fig:fluxes},
-and converting to dimensional units, we obtain the following estimate for the turbulent diffusivity:
-\begin{equation}
-D \approx \left( 0.6 \mathrm{ \;m^2/s}\right)
-\frac{\left(T / 500 \mathrm{\;eV}\right)^{3/2}}
-{\left(B/2\mathrm{\;T}\right)^2 \left( L_n / 1 \mathrm{\;cm}\right)}
-\end{equation}
-This magnitude of diffusion coefficient is large enough to be of interest experimentally.
 
 
 \section{Turbulence implies transient amplification of typical states}
@@ -845,7 +861,7 @@ are suppressed despite the presence of linear instability.
 
 In this system without unstable eigenvalues, we find that sustained nonlinear turbulence
 and transient linear amplification both become possible around $L_s / L_n \gtrsim 20$
-(for the collisionality $\nu_{ee} k_y \rho_i / \omega_* = 0.1$ and other parameters considered.)
+(for the collisionality $\nuee L_n / v_i = 0.05$ and other parameters considered.)
 As discussed in section \ref{sec:proof}, the fact that these two phenomena appear together is not
 a coincidence. Transient linear amplification in the free energy norm $W$ is a necessary condition for statistically steady
 turbulence, and the turbulent state must have a significant projection onto states that are linearly growing in the $W$
@@ -908,8 +924,8 @@ Using (\ref{eq:qn}), and after some algebra, the local dispersion relation may t
 \nonumber
 \end{eqnarray}
 Here, $\zeta_s = \omega/(\left| k_{||} \right| v_s)$, $v_s = \sqrt{2 T_s/m_s}$ is the thermal speed, $Z_s = Z(\zeta_s)$, $Z$ is the plasma dispersion function,
-$\Gamma_{js} = I_j(b_s)e^{-b_s}$, $I_j$ is a modified Bessel function, and $b_s = k_{\perp}^2 v_s^2/(2 \Omega_s^2)$.
-As before, $\omega_* = k_y T_e/(e B L_n)$.
+$\Gamma_{js} = I_j(b_s)e^{-b_s}$, $I_j$ is a modified Bessel function, $b_s = k_{\perp}^2 v_s^2/(2 \Omega_s^2)$,
+and $\omega_* = k_y T_e/(e B L_n)$.
 Figure \ref{fig:localDispersionRelation} shows the solution of (\ref{eq:dispersionRelation})
 with largest imaginary part for the case $T_e = T_i$
 and the deuterium-electron mass ratio.
