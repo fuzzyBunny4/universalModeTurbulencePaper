@@ -48,8 +48,7 @@
 \newcommand{\nuee}{\nu_{ee}}
 \newcommand{\energy}{\mathcal{E}}
 \newcommand{\sgn}{\mathrm{sgn}}
-\newcommand{\changed}[1]{#1}
-\newcommand{\todo}[1]{\textcolor{red}{#1}}
+\newcommand{\changed}[1]{\textcolor{red}{#1}}
 \newcommand{\transpose}{\mathrm{T}}
 
 
@@ -190,7 +189,10 @@ For these studies, the initial-value gyrokinetic code gs2 \cite{gs2} will be use
 for numerical computations.
 First, in section \ref{sec:transient} we demonstrate that
 significant transient linear amplification is possible in this system,
-as long as the magnetic shear is not too strong.
+\changed{and that the transiently growing fluctuations
+resemble the zero-shear eigenmodes
+in their dependence of the growth rate on wavenumber.}
+%as long as the magnetic shear is not too strong.
 Second, in section \ref{sec:turbulence} we demonstrate that universal-mode turbulence without linear
 instability, seen previously in the fluid model in \cite{Drake},
 is also possible in the gyrokinetic model.
@@ -334,6 +336,14 @@ Even without temperature gradients, the system may still be unstable to the univ
 driven by the density gradient.
 For reference, the growth rates and frequencies of this instability
 in the absence of magnetic shear are given in Appendix \ref{appendix:zeroShear}.
+\changed{
+As detailed in the appendix, some insight into the instability can be obtained by expanding
+the the plasma dispersion function $Z$ for the electrons in the small-argument limit,
+$Z(\omega / (|k_{||}| v_e)) \approx i \sqrt{\pi}$ for $|\omega / (k_{||} v_e)| \ll 1$,
+and by expanding the ion $Z$ function in the large argument limit,
+$Z(\omega / (|k_{||}| v_i)) \approx - |k_{||}| v_i / \omega$ for $|\omega / (k_{||} v_i)| \gg 1$.
+One then finds a frequency with positive imaginary part $\propto i \sqrt{\pi} \omega_*$,
+indicating the instability is due to resonant electrons in the presence of a density gradient.}
 As this instability is stabilized for $k_y \rho_i \ll 1$ when even a small amount of magnetic shear
 is introduced \cite{Ross, Tsang}, we might expect that this system can exhibit transient linear amplification, with
 the number of $e$-foldings of amplification tending to infinity as the magnetic shear tends to zero.  In this way, the apparently singular limit
@@ -407,6 +417,64 @@ or relative to the amplitude at $t=0$.
 In both cases, we define the amplification factor to be 1
 if there is no such transient amplification.
 
+\changed{
+The transiently growing structures in the presence of magnetic shear
+are closely related to the zero-shear eigenmodes.  To demonstrate this relationship, we define an effective
+$k_{\perp}$ for the transient fluctuation at each time by
+\begin{equation}
+\label{eq:expectedKperp}
+\left< k_{\perp} \right>(t) = \frac{\int dz\; k_{\perp}(z) \left| \Phi(z,t)\right|^2}
+{\int dz\; k_{\perp}(z) \left| \Phi(z,t)\right|^2}.
+\end{equation}
+Similarly, we define an effective $|k_{||}|$ at each time for the transient structure
+by
+\begin{equation}
+\label{eq:expectedKpar}
+\left< \left| k_{||} \right| \right>(t) = \frac{\int dk_{||}  \left| k_{||}\right| \left| \tilde\Phi(k_{||},t)\right|^2}
+{\int dk_{||}\left| \tilde\Phi(k_{||},t)\right|^2}
+\end{equation}
+where $\tilde\Phi$ is the Fourier transform of $\Phi$ in $z$. Using these effective values
+of $k_{\perp}$ and $k_{||}$, the zero-shear dispersion relation may be evaluated.
+The resulting growth rate can then be compared to the instantaneous growth rate of the finite-shear
+transient structure, $\gamma = (2W(t))^{-1} dW/dt$.  This comparison is shown in figure \ref{fig:comparingTransientTo0Shear}.
+In this figure, we display 25 independent simulations of transients,
+varying $L_s/L_n$ between 20 and 300, and plotting the evolution of $\gamma$ from the time
+of peak growth rate to the time at which the energy begins to decay.
+In each case, there is very close agreement between the instantaneous growth rate of the transient
+and the `predicted' growth rate from the zero-shear dispersion relation.
+Thus, we can conclude that the transiently growing structures are closely related to the zero-shear
+eigenmodes.  Magnetic shear causes $k_{\perp}$ and $k_{||}$ to vary with time as the structure
+evolves (unlike the zero-shear case in which $k_{\perp}$ and $k_{||}$ are constants.)
+However, at each instant, the finite-shear transient grows at precisely the rate expected from the zero-shear
+instability at the average wavenumbers $\left< k_{\perp} \right>$ and $\left< \left| k_{||} \right| \right>$.
+For the simulations in figure  \ref{fig:comparingTransientTo0Shear}, $k_y \rho_i = 2$ and $\nuee = 0.05 v_i/L_n$.
+}
+
+\begin{figure}[h!]
+% Data generated on Edison in /global/scratch2/sd/landrema/20150109-01-coderunner-edison-0shearUniversalInstability/vnewk_e_0p05
+% Figure generated with m20150109_04_cmprngTransientGrowthRateTo0ShearForPaper.m
+\includegraphics[width=3in]{m20150109_04_cmprngTransientGrowthRateTo0ShearForPaper.pdf}
+\caption{(Color online)
+\changed{
+Although a change from zero to small finite magnetic shear causes a fundamental change in the eigenvalues,
+(which change from unstable to decaying), 
+the \emph{transient} finite-shear structures remain similar to the zero-shear modes.  For as shown here,
+the instantaneous growth rate of the transient finite-shear structure is nearly identical
+to the growth rate of a zero-shear eigenmode at the dominant $k_{\perp}$ and $k_{||}$ values
+(\ref{eq:expectedKperp})-(\ref{eq:expectedKpar}).  Each trajectory shown is an independent
+linear initial-value calculation, with $L_s/L_n$ varying from 20-300 between simulations.  The growth rate is plotted from
+the time of maximum growth rate (at the $+$ symbols) until decay begins.
+}
+\label{fig:comparingTransientTo0Shear}}
+\end{figure}
+
+\changed{
+For the range of $k_{||}$ and $k_{\perp}$ values computed for the transient structures
+of figure \ref{fig:comparingTransientTo0Shear}, the zero-shear dispersion relation
+is well approximated by the approximate analytic dispersion relation (\ref{eq:approxRoot}).  Thus, we can also conclude
+that the transient structures, like the zero-shear eigenmodes,
+are driven by the combination of resonant electrons and the density gradient.
+}
 
 Transient amplification is exponentially reduced by increasing magnetic shear,
 as illustrated in figure \ref{fig:transientAmplificationVsLsOverLn}.
@@ -448,7 +516,7 @@ which is not associated with entropy-producing collisions.
 % Plot generated by first running
 % m20141121_02_plotTransientAmplificationLsOverLnScanForPaper.m on edison,
 % and then running
-% m20140723_03_plotTransientAmplificationLsOverLnScanForPaper.m on my laptop.
+% m20141121_03_plotTransientAmplificationLsOverLnScanForPaper.m on my laptop.
 % ----------------------------------------
 % Data for previous version of figure computed on Edison in /global/scratch2/sd/landrema/20140718-01-coderunner-edison-transientAmplificationScans
 % Plot generated by first running
@@ -841,6 +909,11 @@ as with other systems that have sensitive eigenvalues \cite{TrefethenEmbree}.
 Indeed, here we have demonstrated that significant
 transient linear amplification is possible in the drift wave system even when
 all eigenmodes are decaying.
+\changed{
+As shown in figure \ref{fig:comparingTransientTo0Shear},
+the transient structures grow at the zero-shear
+growth rate, when evaluated at the dominant $k_{\perp}$ and $k_{||}$ at that instant.
+}
 We have demonstrated that the amount and duration of amplification scale
 with the magnetic shear length $L_s$, so these quantities naturally become
 unbounded in the limit of vanishing shear.
@@ -896,7 +969,7 @@ under Award Numbers DEFG0293ER54197 and DEFC0208ER54964.
 Computations were performed on the Edison system at
 the National Energy Research Scientific Computing Center, a DOE Office of Science User Facility supported by the Office of Science of the U.S. Department of Energy under Contract No. DE-AC02-05CH11231.
 Conversations with 
-Tom Antonsen, Michael Barnes, Greg Colyer, James Drake, Edmund Highcock, Greg Hammett, Adil Hassam, and Freja Nordsiek
+Tom Antonsen, Michael Barnes, Greg Colyer, James Drake, Edmund Highcock, Greg Hammett, and Adil Hassam
 are gratefully acknowledged.
 \end{acknowledgments}
 
@@ -953,6 +1026,19 @@ real parts of the frequency are shown.
 \label{fig:localDispersionRelation}}
 \end{figure}
 
+\changed{
+Some insight into the density-gradient-driven instability can be obtained by
+considering the limit $|\zeta_e| \ll 1$ so $Z_e \approx i\sqrt{\pi}$,
+and $|\zeta_i| \gg 1$ so $Z_i \approx -1/\zeta_i$. Considering solutions with $|\omega/\omega_*| \ll 1$,
+one finds
+\begin{equation}
+\label{eq:approxRoot}
+\omega = \frac{\omega_* \Gamma_{0i}}
+{\left(\frac{T_e}{T_i}+1\right)^2 + \left(\sqrt{pi}\frac{\omega_*}{|k_{||}| v_e}\right)^2}
+\left( \frac{T_e}{T_i} + 1 + i \sqrt{\pi}\frac{\omega_*}{|k_{||}| v_e}\right).
+\end{equation}
+The imaginary part of $\omega$ evidently arises due to the electron resonance $Z_e \approx i\sqrt{\pi}$.
+}
 
 \bibliography{universalModeTurbulencePaper}
 
