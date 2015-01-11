@@ -191,7 +191,7 @@ First, in section \ref{sec:transient} we demonstrate that
 significant transient linear amplification is possible in this system,
 \changed{and that the transiently growing fluctuations
 resemble the zero-shear eigenmodes
-in their dependence of the growth rate on wavenumber.}
+in the dependence of their instantaneous growth rate on wavenumber.}
 %as long as the magnetic shear is not too strong.
 Second, in section \ref{sec:turbulence} we demonstrate that universal-mode turbulence without linear
 instability, seen previously in the fluid model in \cite{Drake},
@@ -228,7 +228,7 @@ dropping toroidal effects:
 =
 \frac{q_s}{T_s} f_{Ms} \frac{\partial \left<\Phi\right>_{\vect{R}_s}}{\partial t}
 -\frac{f_{Ms}}{B L_n} \frac{\partial \left< \Phi\right>_{\vect{R}_s}}{\partial Y_s}
-\left[ 1 + \left( \energy_s-\frac{3}{2}\right) \eta_s\right]
+\left[ 1 + \left( \energy_s-\frac{3}{2}\right) \eta_s\right],
 \nonumber
 \end{eqnarray}
 together with the quasineutrality condition
@@ -283,7 +283,7 @@ One important property of the system (\ref{eq:gke})-(\ref{eq:qn})
 is the free energy conservation equation \cite{Howes, AbelReview}
 obtained from the $\sum_s \int d^3R_s \int d^3v (T_s h_s/f_{Ms}) (\ldots)$ moment of (\ref{eq:gke}):
 \begin{equation}
-\frac{d W}{d t} = S(h_i,h_e)
+\frac{d W}{d t} = S(h_i,h_e),
 \label{eq:dWdt}
 \end{equation}
 where
@@ -344,10 +344,17 @@ and by expanding the ion $Z$ function in the large argument limit,
 $Z(\omega / (|k_{||}| v_i)) \approx - |k_{||}| v_i / \omega$ for $|\omega / (k_{||} v_i)| \gg 1$.
 One then finds a frequency with positive imaginary part $\propto i \sqrt{\pi} \omega_*$,
 indicating the instability is due to resonant electrons in the presence of a density gradient.}
-As this instability is stabilized for $k_y \rho_i \ll 1$ when even a small amount of magnetic shear
-is introduced \cite{Ross, Tsang}, we might expect that this system can exhibit transient linear amplification, with
-the number of $e$-foldings of amplification tending to infinity as the magnetic shear tends to zero.  In this way, the apparently singular limit
-of zero shear may be seen as a continuous limit of the general shear case.
+When an arbitrarily small amount of magnetic shear is introduced, the global eigenmodes are 
+no longer recognizable as the unsheared slab modes, and indeed are absolutely stable 
+for $k_y\rho_i \ll 1$ \cite{Ross,Tang}.  One might reasonably expect weakly sheared systems with 
+stable global eigenmodes to exhibit transient linear amplification, with the number of $e$-foldings 
+of amplification tending to infinity as the magnetic shear tends to zero.  In the following section, 
+we will show this hypothesis to be true, and thereby demonstrate the apparently singular limit of zero shear 
+to be a continuous limit of the general shear case.
+%As this instability is stabilized for $k_y \rho_i \ll 1$ when even a small amount of magnetic shear
+%is introduced \cite{Ross, Tsang}, we might expect that this system can exhibit transient linear amplification, with
+%the number of $e$-foldings of amplification tending to infinity as the magnetic shear tends to zero.  In this way, the apparently singular limit
+%of zero shear may be seen as a continuous limit of the general shear case.
 
 
 \section{Transient linear amplification}
@@ -419,21 +426,22 @@ if there is no such transient amplification.
 
 \changed{
 The transiently growing structures in the presence of magnetic shear
-are closely related to the zero-shear eigenmodes.  To demonstrate this relationship, we define an effective
-$k_{\perp}$ for the transient fluctuation at each time by
+are closely related to the zero-shear eigenmodes.  To demonstrate this relationship, we consider a single
+$(k_x,k_y)$, and define an effective
+$k_{\perp}$ at each time for the transient fluctuation by
 \begin{equation}
 \label{eq:expectedKperp}
-\left< k_{\perp} \right>(t) = \frac{\int dz\; k_{\perp}(z) \left| \Phi(z,t)\right|^2}
-{\int dz\; k_{\perp}(z) \left| \Phi(z,t)\right|^2}.
+\left< k_{\perp} \right>(t) = \frac{\int dz\; k_{\perp}(z) \left| \Phi_{k_x,k_y}(t,z)\right|^2}
+{\int dz\; k_{\perp}(z) \left| \Phi_{k_x,k_y}(t,z)\right|^2}.
 \end{equation}
 Similarly, we define an effective $|k_{||}|$ at each time for the transient structure
 by
 \begin{equation}
 \label{eq:expectedKpar}
-\left< \left| k_{||} \right| \right>(t) = \frac{\int dk_{||}  \left| k_{||}\right| \left| \tilde\Phi(k_{||},t)\right|^2}
-{\int dk_{||}\left| \tilde\Phi(k_{||},t)\right|^2}
+\left< \left| k_{||} \right| \right>(t) = \frac{\int dk_{||}  \left| k_{||}\right| \left| \tilde\Phi_{k_x,k_y}(t,k_{||})\right|^2}
+{\int dk_{||}\left| \tilde\Phi_{k_x,k_y}(t,k_{||})\right|^2},
 \end{equation}
-where $\tilde\Phi$ is the Fourier transform of $\Phi$ in $z$. Using these effective values
+where $\tilde\Phi_{k_x,k_y}$ is the Fourier transform of $\Phi_{k_x,k_y}$ in $z$. Using these effective values
 of $k_{\perp}$ and $k_{||}$, the zero-shear dispersion relation may be evaluated.
 The resulting growth rate can then be compared to the instantaneous growth rate of the finite-shear
 transient structure, $\gamma = (2W(t))^{-1} dW/dt$.  This comparison is shown in figure \ref{fig:comparingTransientTo0Shear}.
@@ -824,14 +832,14 @@ are real, though the following argument may be generalized to complex
 $\vect{L}$ by replacing the transpose operation with Hermitian conjugation.)
 Also let $\vect{E}$ be the time-independent operator that defines the free energy norm:
 \begin{equation}
-W = \vect{h}^{\transpose} \vect{E} \vect{h}
+W = \vect{h}^{\transpose} \vect{E} \vect{h},
 \label{eq:hEh}
 \end{equation}
 where $^\transpose$ denotes the transpose. Note that $\vect{E}$ is real and symmetric
 ($\vect{E} = \vect{E}^\transpose$). Differentiating (\ref{eq:hEh}),
 \begin{equation}
 \label{eq:dWdt2}
-dW/dt = \vect{h}^{\transpose} \left[ (\vect{E}\vect{L})^\transpose + \vect{E}\vect{L} \right] \vect{h}
+dW/dt = \vect{h}^{\transpose} \left[ (\vect{E}\vect{L})^\transpose + \vect{E}\vect{L} \right] \vect{h},
 \end{equation}
 which is equivalent to (\ref{eq:dWdt}). As discussed previously, the presence of the nonlinear term
 does not alter (\ref{eq:dWdt}) (since the nonlinear term is annihilated in the integration over
@@ -947,7 +955,7 @@ The amplitude of the instantaneously growing states (instantaneous optimals) mus
 significant, enough for the associated input of free energy to balance decay of energy
 from the states that are decaying.
 
-Note that the transient linear process emphasized here and nonlinear or secondary instability are not mutually
+Note that the transient linear process emphasized here and secondary instability are not mutually
 exclusive. Both are required to support turbulence.
 Some form of secondary instability (as discussed in \cite{Drake}) must be present to transfer energy out of the transiently growing linear
 structures before these structures begin to decay substantially. However, nonlinear processes cannot
