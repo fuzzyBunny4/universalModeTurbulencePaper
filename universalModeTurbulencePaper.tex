@@ -48,7 +48,8 @@
 \newcommand{\nuee}{\nu_{ee}}
 \newcommand{\energy}{\mathcal{E}}
 \newcommand{\sgn}{\mathrm{sgn}}
-\newcommand{\changed}[1]{\textcolor{red}{#1}}
+%\newcommand{\changed}[1]{\textcolor{red}{#1}}
+\newcommand{\changed}[1]{#1}
 \newcommand{\transpose}{\mathrm{T}}
 
 
@@ -165,8 +166,14 @@ very low \cite{usUniversalInstability}.
 When both magnetic shear and modest collisions are included \cite{usUniversalInstability},
 the mode becomes linearly stable at all $k_y \rho_i$.
 It is this latter situation that we will consider here.
+(As an aside, the small-but-finite-shear eigenmodes
+are different from zero-shear modes not only for the
+universal instability, but also for the slab ion-temperature-gradient (ITG) instability.
+Specifically, in \cite{Plunk2014}, considering the slab mode by setting
+curvature drift effects $\omega_d$ to 0, the small-shear limit of (19) is different from 
+the zero shear result (12).)
 
-The fluid analogue of this drift wave system was investigated in \cite{Drake},
+The fluid version of this drift wave system was investigated in \cite{Drake},
 using a model with three fluctuating quantities (density, electrostatic potential, and parallel velocity).
 In this model all linear modes were damped, yet nonlinearly, turbulence could be sustained.
 It was pointed out that an important secondary
@@ -330,7 +337,7 @@ apply to both the linear and nonlinear dynamics.
 The system (\ref{eq:gke})-(\ref{eq:qn}) may or may not possess absolute linear instability,
 depending on the physical parameters.
 For the rest of this paper, we take $\eta_i = \eta_e = 0$
-so it is certain that the ion-temperature-gradient (ITG) and electron-temperature-gradient (ETG)
+so it is certain that the ion-temperature-gradient and electron-temperature-gradient (ETG)
 instabilities are suppressed.
 Even without temperature gradients, the system may still be unstable to the universal instability
 driven by the density gradient.
@@ -346,7 +353,7 @@ One then finds a frequency with positive imaginary part $\propto i \sqrt{\pi} \o
 indicating the instability is due to resonant electrons in the presence of a density gradient.}
 When an arbitrarily small amount of magnetic shear is introduced, the global eigenmodes are 
 no longer recognizable as the unsheared slab modes, and indeed are absolutely stable 
-for $k_y\rho_i \ll 1$ \cite{Ross,Tang}.  One might reasonably expect weakly sheared systems with 
+for $k_y\rho_i \ll 1$ \cite{Ross,Tsang}.  One might reasonably expect weakly sheared systems with 
 stable global eigenmodes to exhibit transient linear amplification, with the number of $e$-foldings 
 of amplification tending to infinity as the magnetic shear tends to zero.  In the following section, 
 we will show this hypothesis to be true, and thereby demonstrate the apparently singular limit of zero shear 
@@ -955,6 +962,14 @@ The amplitude of the instantaneously growing states (instantaneous optimals) mus
 significant, enough for the associated input of free energy to balance decay of energy
 from the states that are decaying.
 
+Considering the nonlinear and linear results together, the existence of transient amplification and 
+turbulence evidently depends on whether magnetic shear is sufficiently weak that un-sheared slab mode 
+dynamics can persist.  
+This geometric property can be controlled independently of the energy source of the turbulence (i.e. the density gradient),
+in contrast to turbulence driven by sheared flows where the nonuniformity of the flow plays two roles at once:
+shaping the global structure of the growing structures and providing energy to the turbulence.
+This feature makes the present system an interesting case study of sub-critical turbulence, and we are unaware of other such examples.”
+
 Note that the transient linear process emphasized here and secondary instability are not mutually
 exclusive. Both are required to support turbulence.
 Some form of secondary instability (as discussed in \cite{Drake}) must be present to transfer energy out of the transiently growing linear
@@ -1036,7 +1051,7 @@ real parts of the frequency are shown.
 
 \changed{
 Some insight into the density-gradient-driven instability can be obtained by
-considering the limit $|\zeta_e| \ll 1$ so $Z_e \approx i\sqrt{\pi}$,
+examining the limit $|\zeta_e| \ll 1$ so $Z_e \approx i\sqrt{\pi}$,
 and $|\zeta_i| \gg 1$ so $Z_i \approx -1/\zeta_i$. Considering solutions with $|\omega/\omega_*| \ll 1$,
 one finds
 \begin{equation}
@@ -1045,7 +1060,7 @@ one finds
 {\left(\frac{T_e}{T_i}+1\right)^2 + \left(\sqrt{\pi}\frac{\omega_*}{|k_{||}| v_e}\right)^2}
 \left( \frac{T_e}{T_i} + 1 + i \sqrt{\pi}\frac{\omega_*}{|k_{||}| v_e}\right).
 \end{equation}
-The imaginary part of $\omega$ evidently arises due to the electron resonance $Z_e \approx i\sqrt{\pi}$.
+The imaginary part of $\omega$, proportional to  $Z_e \approx i\sqrt{\pi}$, evidently arises due to the electron resonance.
 }
 
 \bibliography{universalModeTurbulencePaper}
