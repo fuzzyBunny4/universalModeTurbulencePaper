@@ -48,8 +48,8 @@
 \newcommand{\nuee}{\nu_{ee}}
 \newcommand{\energy}{\mathcal{E}}
 \newcommand{\sgn}{\mathrm{sgn}}
-%\newcommand{\changed}[1]{\textcolor{red}{#1}}
-\newcommand{\changed}[1]{#1}
+\newcommand{\changed}[1]{\textcolor{red}{#1}}
+%\newcommand{\changed}[1]{#1}
 \newcommand{\transpose}{\mathrm{T}}
 
 
@@ -170,7 +170,7 @@ It is this latter situation that we will consider here.
 are different from zero-shear modes not only for the
 universal instability, but also for the slab ion-temperature-gradient (ITG) instability.
 Specifically, in \cite{Plunk2014}, considering the slab mode by setting
-curvature drift effects $\omega_d$ to 0, the small-shear limit of (19) is different from 
+curvature drift effects $\omega_d$ to 0, the small-shear limit of (19) is different from
 the zero shear result (12).)
 
 The fluid version of this drift wave system was investigated in \cite{Drake},
@@ -196,10 +196,9 @@ For these studies, the initial-value gyrokinetic code gs2 \cite{gs2} will be use
 for numerical computations.
 First, in section \ref{sec:transient} we demonstrate that
 significant transient linear amplification is possible in this system,
-\changed{and that the transiently growing fluctuations
+and that the transiently growing fluctuations
 resemble the zero-shear eigenmodes
-in the dependence of their instantaneous growth rate on wavenumber.}
-%as long as the magnetic shear is not too strong.
+in the dependence of their instantaneous growth rate on wavenumber.
 Second, in section \ref{sec:turbulence} we demonstrate that universal-mode turbulence without linear
 instability, seen previously in the fluid model in \cite{Drake},
 is also possible in the gyrokinetic model.
@@ -252,11 +251,12 @@ and $f_{Ms}$ is the leading-order Maxwellian.
 The scale length of the equilibrium density $n$ is $L_n = -n/(dn/dx)$,
 $q_i = e = -q_e$ is the proton charge,
 $T_s$ is the species temperature,
+\changed{$\eta_s=(d \ln T_s/dx)/(d \ln n/dx)$,}
 $C_s$ is the collision operator,
 and
-$\left<\right>_{\vect{r}}$ 
-and 
-$\left<\right>_{\vect{R}_s}$ 
+$\left<\right>_{\vect{r}}$
+and
+$\left<\right>_{\vect{R}_s}$
 denote gyroaverages at fixed particle position $\vect{r}=(x,y,z)$ and guiding-center position $\vect{R}_s=(X_s,Y_s,Z_s)$.
 The distinction between $z$ and $Z_s$ may be neglected.
 Expanding the fluctuating quantities in spatial Fourier modes as $\Phi = \sum_{k_x,k_y} \Phi_{k_x,k_y}(t,z) \exp(i k_x x + i k_y y)$
@@ -277,7 +277,6 @@ The system is uniquely specified by the following dimensionless parameters:
 $L_s / L_n$, $\eta_i$, $\eta_e$, $T_e / T_i$, and collisionality $\nuee L_n / v_i$,
 where $\nuee = \sqrt{2}\pi n e^4 \ln\Lambda/[(4\pi\epsilon_0)^2 m_e^{1/2} T_e^{3/2}]$ is the electron-electron collision frequency
 and $v_i = \sqrt{2 T_i / m_i}$.
-%and $\omega_* = k_y T_e/(e B L_n)$ is the electron drift frequency.
 
 Notice that the parallel coordinate $z$ enters the system (\ref{eq:gke})-(\ref{eq:kperp}) only through (\ref{eq:kperp}).
 Also notice $k_x$ enters the system (\ref{eq:gke})-(\ref{eq:kperp}) only through (\ref{eq:kperp}) and through the nonlinear term in (\ref{eq:gke}).
@@ -343,25 +342,20 @@ Even without temperature gradients, the system may still be unstable to the univ
 driven by the density gradient.
 For reference, the growth rates and frequencies of this instability
 in the absence of magnetic shear are given in Appendix \ref{appendix:zeroShear}.
-\changed{
 As detailed in the appendix, some insight into the instability can be obtained by expanding
-the the plasma dispersion function $Z$ for the electrons in the small-argument limit,
+the plasma dispersion function $Z$ for the electrons in the small-argument limit,
 $Z(\omega / (|k_{||}| v_e)) \approx i \sqrt{\pi}$ for $|\omega / (k_{||} v_e)| \ll 1$,
 and by expanding the ion $Z$ function in the large argument limit,
 $Z(\omega / (|k_{||}| v_i)) \approx - |k_{||}| v_i / \omega$ for $|\omega / (k_{||} v_i)| \gg 1$.
-One then finds a frequency with positive imaginary part $\propto i \sqrt{\pi} \omega_*$,
-indicating the instability is due to resonant electrons in the presence of a density gradient.}
-When an arbitrarily small amount of magnetic shear is introduced, the global eigenmodes are 
-no longer recognizable as the unsheared slab modes, and indeed are absolutely stable 
-for $k_y\rho_i \ll 1$ \cite{Ross,Tsang}.  One might reasonably expect weakly sheared systems with 
-stable global eigenmodes to exhibit transient linear amplification, with the number of $e$-foldings 
-of amplification tending to infinity as the magnetic shear tends to zero.  In the following section, 
-we will show this hypothesis to be true, and thereby demonstrate the apparently singular limit of zero shear 
+One then finds a frequency with positive imaginary part $\propto i \sqrt{\pi} / L_n$,
+indicating the instability is due to resonant electrons in the presence of a density gradient.
+When an arbitrarily small amount of magnetic shear is introduced, the global eigenmodes are
+no longer recognizable as the unsheared slab modes, and indeed are absolutely stable
+for $k_y\rho_i \ll 1$ \cite{Ross,Tsang}.  One might reasonably expect weakly sheared systems with
+stable global eigenmodes to exhibit transient linear amplification, with the number of $e$-foldings
+of amplification tending to infinity as the magnetic shear tends to zero.  In the following section,
+we will show this hypothesis to be true, and thereby demonstrate the apparently singular limit of zero shear
 to be a continuous limit of the general shear case.
-%As this instability is stabilized for $k_y \rho_i \ll 1$ when even a small amount of magnetic shear
-%is introduced \cite{Ross, Tsang}, we might expect that this system can exhibit transient linear amplification, with
-%the number of $e$-foldings of amplification tending to infinity as the magnetic shear tends to zero.  In this way, the apparently singular limit
-%of zero shear may be seen as a continuous limit of the general shear case.
 
 
 \section{Transient linear amplification}
@@ -431,16 +425,18 @@ or relative to the amplitude at $t=0$.
 In both cases, we define the amplification factor to be 1
 if there is no such transient amplification.
 
-\changed{
 The transiently growing structures in the presence of magnetic shear
-are closely related to the zero-shear eigenmodes.  To demonstrate this relationship, we consider a single
+are related to the zero-shear eigenmodes.  To demonstrate this relationship, we consider a single
 $(k_x,k_y)$, and define an effective
 $k_{\perp}$ at each time for the transient fluctuation by
+\changed{
 \begin{equation}
 \label{eq:expectedKperp}
-\left< k_{\perp} \right>(t) = \frac{\int dz\; k_{\perp}(z) \left| \Phi_{k_x,k_y}(t,z)\right|^2}
-{\int dz\; k_{\perp}(z) \left| \Phi_{k_x,k_y}(t,z)\right|^2}.
+\left< k_{\perp} \right>(t) = 
+\frac{\int dz\; k_{\perp}(z) \left| \Phi_{k_x,k_y}(t,z)\right|^2}
+{\int dz\; \left| \Phi_{k_x,k_y}(t,z)\right|^2}.
 \end{equation}
+}
 Similarly, we define an effective $|k_{||}|$ at each time for the transient structure
 by
 \begin{equation}
@@ -450,46 +446,88 @@ by
 \end{equation}
 where $\tilde\Phi_{k_x,k_y}$ is the Fourier transform of $\Phi_{k_x,k_y}$ in $z$. Using these effective values
 of $k_{\perp}$ and $k_{||}$, the zero-shear dispersion relation may be evaluated.
-The resulting growth rate can then be compared to the instantaneous growth rate of the finite-shear
-transient structure, $\gamma = (2W(t))^{-1} dW/dt$.  This comparison is shown in figure \ref{fig:comparingTransientTo0Shear}.
+The resulting growth rate 
+\changed{
+and real frequency can then be compared to the behavior of the finite-shear
+transient structure.
+%$\gamma = (2W(t))^{-1} dW/dt$,
+An example of such a comparison is given in figure \ref{fig:comparingTransientTo0Shear_single},
+using the same simulation as in figure \ref{fig:transientAmplification}.
+For this case, we evaluate $\left< k_{\perp}\right>$ and $\left<|k_{||}|\right>$
+at $t = 300 L_n/v_i$.
+The figure shows that near this time, in the region $z \approx 300 L_n$ where the transient structure has greatest
+amplitude, the transient does resemble a wave packet with the real frequency and growth rate
+of the zero-shear eigenmode evaluated at $\left< k_{\perp}\right>$ and $\left<|k_{||}|\right>$.
+The zero-shear eigenmodes cannot remain true eigenmodes when even a minute amount of magnetic shear
+is introduced, since introducing shear turns $k_{\perp}$ from a constant into a function of $z$.
+But if this variation of $k_{\perp}(z)$ is on a longer scale length than $\sim 1/k_{||}$ of the perturbation, 
+then a localized wave packet can exist in a region of nearly constant $k_{\perp}$.
+We can then expect the zero-shear dispersion relation to give accurate predictions for the central frequency
+and growth rate of the packet. This packet will move in $z$, and as a result, the central values of $k_{\perp}$
+and $k_{||}$ will evolve, meaning that the equivalent zero-shear eigenmode at one time
+will differ from the equivalent zero-shear eigenmode at another time. 
+Since the frequency and growth rate of the finite-shear structure thus evolve in time, this structure is not
+itself an eigenmode, not until all points along the field line have had time to communicate with each other
+to set up a new global finite-shear eigenmode.
+However, at each instant of the transient growth phase, the finite-shear structure grows at precisely the rate expected from the zero-shear
+instability at the average wavenumbers $\left< k_{\perp} \right>$ and $\left< \left| k_{||} \right| \right>$.
+}
+
+\begin{figure}[h!]
+\includegraphics[width=4in]{m20150222_01_plotGS2TransientAmplificationVs0ShearEigenmode.pdf}
+\caption{(Color online)
+\changed{
+Comparison of the finite-shear transient from Figure \ref{fig:transientAmplification} to a
+zero-shear eigenmode, where $k_{\perp}$ and $k_{||}$ for the latter are chosen to be $\left<k_{\perp}\right>$ and $\left<|k_{||}|\right>$
+from the transient at $t=300 L_n/v_i$.
+It can be seen that near this time, the transient resembles a wave packet with roughly the same
+complex frequency as the zero-shear eigenmode.
+(The amplitude and phase of the eigenmode in (b) are arbitrary.)
+%from (\ref{eq:expectedKperp})-(\ref{eq:expectedKpar}).
+}
+\label{fig:comparingTransientTo0Shear_single}}
+\end{figure}
+
+\changed{
+To demonstrate this principle across a range of parameters,
+figure  \ref{fig:comparingTransientTo0Shear} demonstrates that the
+correspondence between the finite-shear transients and zero-shear eigenmodes
+is maintained throughout the evolution of the transient and for other
+values of magetic shear.}
+%This comparison is shown in figure \ref{fig:comparingTransientTo0Shear}.
 In this figure, we display 25 independent simulations of transients,
-varying $L_s/L_n$ between 20 and 300, and plotting the evolution of $\gamma$ from the time
+varying $L_s/L_n$ between 20 and 300, and plotting the evolution of $\gamma = (2W(t))^{-1} dW/dt$ from the time
 of peak growth rate to the time at which the energy begins to decay.
+For all simulations shown, $k_y \rho_i = 2$ and $\nuee = 0.05 v_i/L_n$.
 In each case, there is very close agreement between the instantaneous growth rate of the transient
 and the `predicted' growth rate from the zero-shear dispersion relation.
 Thus, we can conclude that the transiently growing structures are closely related to the zero-shear
-eigenmodes.  Magnetic shear causes $k_{\perp}$ and $k_{||}$ to vary with time as the structure
-evolves (unlike the zero-shear case in which $k_{\perp}$ and $k_{||}$ are constants.)
-However, at each instant, the finite-shear transient grows at precisely the rate expected from the zero-shear
-instability at the average wavenumbers $\left< k_{\perp} \right>$ and $\left< \left| k_{||} \right| \right>$.
-For the simulations in figure  \ref{fig:comparingTransientTo0Shear}, $k_y \rho_i = 2$ and $\nuee = 0.05 v_i/L_n$.
-}
+eigenmodes.  
+%Magnetic shear causes $k_{\perp}$ and $k_{||}$ to vary with time as the structure
+%evolves (unlike the zero-shear case in which $k_{\perp}$ and $k_{||}$ are constants.)
+
 
 \begin{figure}[h!]
 % Data generated on Edison in /global/scratch2/sd/landrema/20150109-01-coderunner-edison-0shearUniversalInstability/vnewk_e_0p05
 % Figure generated with m20150109_04_cmprngTransientGrowthRateTo0ShearForPaper.m
-\includegraphics[width=3in]{m20150109_04_cmprngTransientGrowthRateTo0ShearForPaper.pdf}
+\includegraphics[width=4in]{m20150109_04_cmprngTransientGrowthRateTo0ShearForPaper.pdf}
 \caption{(Color online)
-\changed{
 Although a change from zero to small finite magnetic shear causes a fundamental change in the eigenvalues,
-(which change from unstable to decaying), 
+(which change from unstable to decaying),
 the \emph{transient} finite-shear structures remain similar to the zero-shear modes.  For as shown here,
 the instantaneous growth rate of the transient finite-shear structure is nearly identical
 to the growth rate of a zero-shear eigenmode at the dominant $k_{\perp}$ and $k_{||}$ values
 (\ref{eq:expectedKperp})-(\ref{eq:expectedKpar}).  Each trajectory shown is an independent
 linear initial-value calculation, with $L_s/L_n$ varying from 20-300 between simulations.  The growth rate is plotted from
 the time of maximum growth rate (at the $+$ symbols) until decay begins.
-}
 \label{fig:comparingTransientTo0Shear}}
 \end{figure}
 
-\changed{
 For the range of $k_{||}$ and $k_{\perp}$ values computed for the transient structures
 of figure \ref{fig:comparingTransientTo0Shear}, the zero-shear dispersion relation
 is well approximated by the approximate analytic dispersion relation (\ref{eq:approxRoot}).  Thus, we can also conclude
 that the transient structures, like the zero-shear eigenmodes,
 are driven by the combination of resonant electrons and the density gradient.
-}
 
 Transient amplification is exponentially reduced by increasing magnetic shear,
 as illustrated in figure \ref{fig:transientAmplificationVsLsOverLn}.
@@ -651,15 +689,15 @@ demonstrating nonlinear instability.
 
 A variety of strategies can be used to initiate the nonlinear instability in numerical simulations.
 Large-amplitude noise can be used, but this method is numerically inconvenient (at least in gs2) due to the rapid
-drop in amplitude of strongly damped modes over the first few timesteps,
-which causes significant changes in the CFL-stable timestep associated
+drop in amplitude of strongly damped modes over the first few time steps,
+which causes significant changes in the CFL-stable time step associated
 with the perpendicular $\vect{E}\times\vect{B}$ speed,
 thereby requiring recomputation of the implicit time-advance operator.
 Another method for initiating the nonlinear instability is to begin with a sufficient
 temperature gradient to bring about linear instability, and then to reduce the temperature gradient
 once the turbulence reaches a sufficient amplitude \cite{Drake}.
 A third effective method, the one used in figure \ref{fig:amplitudeDependence},
-is to initialize with one of the least-damped linear eigenmodes scaled up to appropriate amplitude, with noise in the other modes.  We find this method to be particularly convenient since variation in the stable timestep
+is to initialize with one of the least-damped linear eigenmodes scaled up to appropriate amplitude, with noise in the other modes.  We find this method to be particularly convenient since variation in the stable time step
 is minimized.
 
 \begin{figure}[h!]
@@ -734,7 +772,6 @@ as the particle flux, meaning heat flows in the $-\nabla n$ direction.
 
 The fluxes in figure \ref{fig:fluxes} are normalized by gyro-Bohm values defined using the length $L_n$ and including the 2 in the thermal speed, e.g.
 the particle flux is normalized by $(\rho_i / L_n)^2 n v_i$.
-%Using the amplitude of the normalized particle flux from figure \ref{fig:fluxes},
 Converting to dimensional units for a deuterium plasma, we obtain the following estimate for the turbulent particle diffusivity:
 $D \approx \left( 0.4 \mathrm{ \;m^2/s}\right)
 \left(T / 500 \mathrm{\;eV}\right)^{3/2}
@@ -769,7 +806,19 @@ are obtained.
 \label{fig:fluxes}}
 \end{figure}
 
-
+\changed{
+As mentioned earlier, for certain values of shear, collisionality, and initial perturbation amplitude,
+a third type of behavior was sometimes observed besides the two outcomes shown in figure \ref{fig:amplitudeDependence}:
+turbulence resembling figure  \ref{fig:amplitudeDependence}.a can persist for a finite time but eventually decay linearly
+as in figure  \ref{fig:amplitudeDependence}.b.
+This finite-lifetime plasma turbulence is reminiscent of turbulent puffs in neutral (Navier-Stokes) pipe flow.
+In neutral pipe flow it has been found \cite{Hof2006, Tel} that in fact
+the lifetime of turbulence puffs does not become infinite at a critical value of the relevant physical parameter (Reynolds number) but rather
+the lifetime varies with Reynolds number exponentially, so the turbulence lifetime can become longer than any reasonable observation
+time.
+An interesting open question (which we leave for future research) is whether a similar phenomenon may occur
+in the plasma system we consider here.
+}
 
 \section{Turbulence implies transient amplification of typical states}
 \label{sec:proof}
@@ -798,7 +847,7 @@ for some time following $t_0$, i.e. there must be transient linear amplification
 Recall that (\ref{eq:dWdt}) is a moment of both the nonlinear and linear dynamical equations.
 When the nonlinear term is turned off at $t_0$, $S(h_i,h_e)$ does not immediately change, because
 the system state does not immediately change. Therefore, $dW/dt$ must vary \emph{continuously}
-when the nonlinear term is turned off, and so $dW/dt$ is positive for some period followiwng $t_0$ under the 
+when the nonlinear term is turned off, and so $dW/dt$ is positive for some period following $t_0$ under the
 action of the linear dynamics.
 Recall $W$ is a sum of positive contributions (\ref{eq:Wk}) from each 2D mode:
 $W = \sum_{k_x,k_y} W_{k_x,k_y}$.
@@ -814,7 +863,7 @@ can be transiently amplified. Furthermore, the energy growth in the 2D modes tha
 must be sufficient to balance the energy decay from the damped 2D modes.
 
 Next, we present a second argument for the necessity of transient amplification.
-This argument is based on linear algebra and closely follows \cite{DelSoleNecessity}.  
+This argument is based on linear algebra and closely follows \cite{DelSoleNecessity}.
 For this second approach, we let $\vect{h}$ denote
 a column vector that specifies the state of the system $\{h_i,h_e\}$ in some convenient basis.
 For example, $\vect{h}$ could represent the array of values specifying the distribution function in a code.
@@ -824,7 +873,7 @@ the nonlinear gyrokinetic system (\ref{eq:gke})-(\ref{eq:qn})
 permits statistically steady turbulence,
 there exists at least one state $\vect{h}_0$ such that
 (1) $dW/dt>0$ if $\vect{h} = \vect{h}_0$, and
-(2) the squared projection of the turbulent state $\vect{h}(t)$ 
+(2) the squared projection of the turbulent state $\vect{h}(t)$
 onto $\vect{h}_0$, defined below, has a non-zero average.
 
 {\it Proof:}
@@ -868,7 +917,7 @@ In the hydrodynamics literature, the eigenvectors $\vect{u}_k$ are sometimes cal
 instantaneous optimals; the $\vect{u}_j$ with maximum $\lambda_j$ is the fluctuation
 that maximizes the instantaneous $dW/dt$.
 We may decompose the state vector in the $\vect{u}_j$ basis:
-$\vect{h}(t) = \sum_j a_j(t) \vect{u}_j$ for some amplitudes $a_j(t)$. 
+$\vect{h}(t) = \sum_j a_j(t) \vect{u}_j$ for some amplitudes $a_j(t)$.
 Using this decomposition in (\ref{eq:avg}) gives
 \begin{equation}
 \label{eq:sum}
@@ -924,11 +973,9 @@ as with other systems that have sensitive eigenvalues \cite{TrefethenEmbree}.
 Indeed, here we have demonstrated that significant
 transient linear amplification is possible in the drift wave system even when
 all eigenmodes are decaying.
-\changed{
 As shown in figure \ref{fig:comparingTransientTo0Shear},
 the transient structures grow at the zero-shear
 growth rate, when evaluated at the dominant $k_{\perp}$ and $k_{||}$ at that instant.
-}
 We have demonstrated that the amount and duration of amplification scale
 with the magnetic shear length $L_s$, so these quantities naturally become
 unbounded in the limit of vanishing shear.
@@ -962,9 +1009,9 @@ The amplitude of the instantaneously growing states (instantaneous optimals) mus
 significant, enough for the associated input of free energy to balance decay of energy
 from the states that are decaying.
 
-Considering the nonlinear and linear results together, the existence of transient amplification and 
-turbulence evidently depends on whether magnetic shear is sufficiently weak that un-sheared slab mode 
-dynamics can persist.  
+Considering the nonlinear and linear results together, the existence of transient amplification and
+turbulence evidently depends on whether magnetic shear is sufficiently weak that un-sheared slab mode
+dynamics can persist.
 This geometric property can be controlled independently of the energy source of the turbulence (i.e. the density gradient),
 in contrast to turbulence driven by sheared flows where the nonuniformity of the flow plays two roles at once:
 shaping the global structure of the growing structures and providing energy to the turbulence.
@@ -991,7 +1038,7 @@ U.S. Department of Energy, Office of Science, Office of Fusion Energy Science,
 under Award Numbers DEFG0293ER54197 and DEFC0208ER54964.
 Computations were performed on the Edison system at
 the National Energy Research Scientific Computing Center, a DOE Office of Science User Facility supported by the Office of Science of the U.S. Department of Energy under Contract No. DE-AC02-05CH11231.
-Conversations with 
+Conversations with
 Tom Antonsen, Michael Barnes, Greg Colyer, James Drake, Edmund Highcock, Greg Hammett, and Adil Hassam
 are gratefully acknowledged.
 \end{acknowledgments}
@@ -1049,7 +1096,6 @@ real parts of the frequency are shown.
 \label{fig:localDispersionRelation}}
 \end{figure}
 
-\changed{
 Some insight into the density-gradient-driven instability can be obtained by
 examining the limit $|\zeta_e| \ll 1$ so $Z_e \approx i\sqrt{\pi}$,
 and $|\zeta_i| \gg 1$ so $Z_i \approx -1/\zeta_i$. Considering solutions with $|\omega/\omega_*| \ll 1$,
@@ -1061,7 +1107,6 @@ one finds
 \left( \frac{T_e}{T_i} + 1 + i \sqrt{\pi}\frac{\omega_*}{|k_{||}| v_e}\right).
 \end{equation}
 The imaginary part of $\omega$, proportional to  $Z_e \approx i\sqrt{\pi}$, evidently arises due to the electron resonance.
-}
 
 \bibliography{universalModeTurbulencePaper}
 
