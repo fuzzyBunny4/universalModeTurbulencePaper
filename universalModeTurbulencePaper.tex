@@ -89,7 +89,7 @@
 
 In this work we numerically demonstrate both significant transient (i.e. non-modal) linear amplification
 and sustained nonlinear turbulence
-in a kinetic system with no unstable eigenmodes.
+in a kinetic plasma system with no unstable eigenmodes.
 The particular system considered is an electrostatic slab
 with magnetic shear, kinetic electrons and ions,
 weak collisions,
@@ -116,11 +116,12 @@ yield transient linear amplification of the gyrokinetic free energy.
 
 Despite the usefulness of linear eigenmode analysis in many contexts,
 it has been established that
-such analysis can in practice give misleading predictions
+eigenmode analysis can in practice give misleading predictions
 about the stability of various systems \cite{TrefethenEmbree}.
 In particular, turbulence may be sustained in a number of fluid systems
-despite the absence of any unstable eigenmodes.
-The first such systems known were certain sheared flow patterns in
+despite the absence of any unstable eigenmodes,
+a phenomenon that may be called ``subcritical turbulence''.
+The first systems known to display this behavior were certain sheared flow patterns in
 neutral fluids, such as plane Poiseuille or plane Couette flow
 \cite{Tillmark,TrefethenSubcritical,Grossman}.
 Later, sustained turbulence was seen
@@ -136,7 +137,7 @@ linear instability exists, but
 the fluctuations in saturated nonlinear turbulence are different in character from the linear
 eigenmodes \cite{Biskamp,Friedman1,Friedman2}.
 
-For the cases of turbulence without absolute linear stability in the presence of sheared flows,
+For the cases of turbulence without absolute linear instability in the presence of sheared flows,
 for both neutral fluids and plasmas, the phenomenon of transient linear amplification
 appears to be important
 \cite{TrefethenSubcritical, FarrellIoannou, Grossman, DelSoleSurvey, TrefethenEmbree, Schmid, Newton, Alex}.
@@ -153,12 +154,12 @@ without instability for the case of the weakly-collisional
 plasma drift wave driven by a density gradient\cite{Galeev,Krall3},
 neglecting toroidal effects.
 This oscillation has been called the ``universal instability'' as it was at first
-mistakenly thought to be linearly unstable in any plasma with a density gradient.
+thought to be linearly unstable in any plasma with a density gradient.
 The oscillation is electrostatic in nature, and linear instability can indeed be found
-in slab geometry without magnetic shear or temperature gradients.
+in slab geometry without magnetic shear.
 It was later established that when any amount of magnetic shear is included in the model,
 no matter how small,
-the eigenmodes become linearly damped for $k_y \rho_i \ll 1$,
+the eigenmodes with $k_y \rho_i \ll 1$ become linearly damped,
 where $k_y$ is the perpendicular wavenumber and $\rho_i$ is the ion gyroradius
 \cite{Ross, Tsang, Antonsen}.
 However, instability can persist at $k_y \rho_i \ge 1$ when the collisionality is
@@ -173,10 +174,10 @@ Specifically, in \cite{Plunk2014}, considering the slab mode by setting
 curvature drift effects $\omega_d$ to 0, the small-shear limit of (19) is different from
 the zero shear result (12).)
 
-The fluid version of this drift wave system was investigated in \cite{Drake},
-using a model with three fluctuating quantities (density, electrostatic potential, and parallel velocity).
-In this model all linear modes were damped, yet nonlinearly, turbulence could be sustained.
-It was pointed out that an important secondary
+Fluid versions of this drift wave system were investigated in \cite{Scott1,Scott2,Drake}.
+%using a model with three fluctuating quantities (density, electrostatic potential, and parallel velocity).
+In these models, all linear modes were damped, yet nonlinearly, turbulence could be sustained.
+In \cite{Drake} it was pointed out that an important secondary
 instability in this system is a drift wave rotated by $\pi/2$ in the plane
 perpendicular to the magnetic field, since the stabilizing effects of magnetic
 shear are reduced in this orientation.
@@ -187,7 +188,7 @@ into the system in the way that can be done by a perturbation feeding off the de
 Several authors have also investigated transient linear effects in fluid drift wave models
 \cite{Camargo, Friedman1, Friedman2}. However, these studies did not
 include magnetic shear, which we will find to have a very strong effect on
-transient behavior.
+some aspects of the transient behavior.
 
 In the following sections, we establish three results concerning the drift wave system in slab geometry
 with magnetic shear,
@@ -195,12 +196,14 @@ extending previous work by considering a kinetic description and exploring the r
 For these studies, the initial-value gyrokinetic code gs2 \cite{gs2} will be used
 for numerical computations.
 First, in section \ref{sec:transient} we demonstrate that
-significant transient linear amplification is possible in this system,
-and that the transiently growing fluctuations
+significant transient linear amplification is possible in this system.
+The transiently growing fluctuations
 resemble the zero-shear eigenmodes
-in the dependence of their instantaneous growth rate on wavenumber.
+in the dependence of their instantaneous growth rate on wavenumber,
+though the transients are sensitive to magnetic shear
+in their global time-dependence.
 Second, in section \ref{sec:turbulence} we demonstrate that universal-mode turbulence without linear
-instability, seen previously in the fluid model in \cite{Drake},
+instability, seen previously in fluid models in \cite{Scott1,Scott2,Drake},
 is also possible in the gyrokinetic model.
 Finally, we prove there is a relationship between
 transient linear amplification and nonlinear turbulence in this system,
@@ -495,7 +498,7 @@ correspondence between the finite-shear transients and zero-shear eigenmodes
 is maintained throughout the evolution of the transient and for other
 values of magetic shear.}
 %This comparison is shown in figure \ref{fig:comparingTransientTo0Shear}.
-In this figure, we display 25 independent simulations of transients,
+In this figure, we display 25 independent simulations of linear transients,
 varying $L_s/L_n$ between 20 and 300, and plotting the evolution of $\gamma = (2W(t))^{-1} dW/dt$ from the time
 of peak growth rate to the time at which the energy begins to decay.
 For all simulations shown, $k_y \rho_i = 2$ and $\nuee = 0.05 v_i/L_n$.
@@ -514,7 +517,7 @@ eigenmodes.
 \caption{(Color online)
 Although a change from zero to small finite magnetic shear causes a fundamental change in the eigenvalues,
 (which change from unstable to decaying),
-the \emph{transient} finite-shear structures remain similar to the zero-shear modes.  For as shown here,
+the \emph{transient} finite-shear structures retain a similarity to the zero-shear modes.  For as shown here,
 the instantaneous growth rate of the transient finite-shear structure is nearly identical
 to the growth rate of a zero-shear eigenmode at the dominant $k_{\perp}$ and $k_{||}$ values
 (\ref{eq:expectedKperp})-(\ref{eq:expectedKpar}).  Each trajectory shown is an independent
@@ -542,8 +545,25 @@ Notice that amplification only appears possible if $L_s/L_n \gtrsim 20$.
 Values of $L_s/L_n$ far in excess of 20 are obtained in the edge of tokamak experiments.
 (For a high aspect ratio tokamak, $L_s \sim qR/\hat{s}$ where $q$ is the safety factor, $R$ is
 the major radius, $\hat{s} = (r/q) dq/dr$, and $r$ is the minor radius.)
-Figure \ref{fig:transientAmplificationVsLsOverLn}.b demonstrates that the time during which amplification occurs
+Figure \ref{fig:transientAmplificationVsLsOverLn}.b demonstrates that the time over which amplification occurs
 varies approximately linearly with $L_s/L_n$.
+The figure compares two measures of the duration of amplification, measuring to the time of maximum either from $t=0$
+or from the time of minimum $W$, akin to figure \ref{fig:transientAmplification}.b but in the time coordinate.
+These two measures of amplification duration display a similar linear trend.
+
+\changed{
+While figures \ref{fig:comparingTransientTo0Shear_single}-\ref{fig:comparingTransientTo0Shear}
+made the case that the transients were insensitive to shear in one sense,
+it is not a contradiction that the transients \emph{are} sensitive to shear
+in the sense of figures \ref{fig:transientAmplificationVsLsOverLn}.a-b.
+Figures  \ref{fig:comparingTransientTo0Shear_single}-\ref{fig:comparingTransientTo0Shear}
+show the dominant complex frequency of the transient at each instant depends on time
+only through $\left<k_{\perp}\right>(t)$
+and $\left<|k_{||}|\right>(t)$ and the zero-shear dispersion relation, with
+no significant additional dependence on shear.  However,  $\left<k_{\perp}\right>(t)$
+and $\left<|k_{||}|\right>(t)$ are sensitive to shear, yielding the sensitivity
+of the overall $W(t)$ curve for each transient seen in figures \ref{fig:transientAmplificationVsLsOverLn}.a-b.
+}
 
 Figure \ref{fig:transientAmplificationVsKy} shows the dependence
 of the amplification factor on $k_y$ at fixed $L_s/L_n = 200$.
@@ -649,7 +669,16 @@ amount of transient growth by a factor $ \lesssim 2\times$ for $k_y \rho_i$ betw
 Thus, this point in parameter space is on the edge of the region in which transient linear
 amplification occurs, as anticipated from figure \ref{fig:transientAmplificationVsLsOverLn}.
 
-Throughout this section, the numerical parameters used were as follows: $12 \times 2$ grid points in pitch angle and $\sgn(v_{||})$, 12 grid points in energy, 24 grid points per cell in $z$ (with cells at $k_y=j \Delta k_y$ linked if separated in $k_x$ by $4 j \Delta k_x$), CFL number 0.5, $256 \times 64$ modes in $x$ and $y$ before dealiasing, and box size $(L_x, L_y, L_z) = (31.4 \rho_i, \; 62.8 \rho_i, \; 160 L_n)$.  It was verified that both the linear and nonlinear results reported in this section were not significantly altered under factor-of-2 changes in any of these numerical parameters.
+Throughout this section, the numerical parameters used were as
+follows: $12 \times 2$ grid points in pitch angle and $\sgn(v_{||})$,
+12 grid points in energy, 24 grid points per cell in $z$ (with cells
+at $k_y=j \Delta k_y$ linked if separated in $k_x$ by $4 j \Delta k_x$
+for each integer $j\ge 1$), CFL number 0.5, $256 \times 64$ modes in $x$
+and $y$ before dealiasing, and box size $(L_x, L_y, L_z) = (31.4
+\rho_i, \; 62.8 \rho_i, \; 160 L_n)$.  It was verified that both the
+linear and nonlinear results reported in this section were not
+significantly altered under factor-of-2 changes in any of these
+numerical parameters.
 
 One noteworthy linear property apparent in figure \ref{fig:linearBox}
 is that damping of modes with $k_y=0$ is very weak,
@@ -795,7 +824,7 @@ A larger diffusion coefficient is obtained if $L_s/L_n$ is increased.
 % m20140807_01_plotGS2_extractFluxesVsTimeForPaper.m on edison,
 % then running
 % m20140807_01_plotFluxesVsTimeForPaper.m on my laptop.
-\includegraphics[width=3in]{m20141210_01_plotGs2FluxesVsTimeForPaper.pdf}
+\includegraphics[width=4in]{m20141210_01_plotGs2FluxesVsTimeForPaper.pdf}
 %\includegraphics[width=3in]{m20140807_01_plotFluxesVsTimeForPaper.pdf}
 %\includegraphics[width=3in]{fluxes.png}
 \caption{(Color online)
@@ -816,8 +845,8 @@ In neutral pipe flow it has been found \cite{Hof2006, Tel} that in fact
 the lifetime of turbulence puffs does not become infinite at a critical value of the relevant physical parameter (Reynolds number) but rather
 the lifetime varies with Reynolds number exponentially, so the turbulence lifetime can become longer than any reasonable observation
 time.
-An interesting open question (which we leave for future research) is whether a similar phenomenon may occur
-in the plasma system we consider here.
+An interesting open question (which we leave for future research) is whether a similar scaling
+of the turbulence lifetime may be present in the plasma system we consider here.
 }
 
 \section{Turbulence implies transient amplification of typical states}
@@ -833,7 +862,7 @@ was given in \cite{DelSoleNecessity} and section 4 of \cite{DelSoleSurvey},
 and below we adapt this reasoning to gyrokinetics.  Before we do so, we give an alternative
 argument that relies less on linear algebra.
 For this discussion, it is useful to define a ``2D mode'' to be any structure with given $k_x$ and $k_y$,
-but with no restriction on the $z$ dependence.
+but with no restriction on the $z$ dependence (so the structure need not be an eigenmode).
 
 {\it Statement 1:} Consider a turbulent solution of the nonlinear gyrokinetic system (\ref{eq:gke})-(\ref{eq:qn}),
 i.e. a solution for which $W$ does not decay to zero at large $t$.
@@ -885,7 +914,8 @@ d\vect{h}/dt = \vect{L}\vect{h}.
 \end{equation}
 (Here we will take $\vect{L}$ to be real since the equations (\ref{eq:gke})-(\ref{eq:qn})
 are real, though the following argument may be generalized to complex
-$\vect{L}$ by replacing the transpose operation with Hermitian conjugation.)
+$\vect{L}$ by replacing the transpose operation with Hermitian conjugation
+in the steps that follow.)
 Also let $\vect{E}$ be the time-independent operator that defines the free energy norm:
 \begin{equation}
 W = \vect{h}^{\transpose} \vect{E} \vect{h},
@@ -930,17 +960,21 @@ average weight $\left< \left| a_{j_0}(t) \right|^2 \right>$. Considering the ass
 $\vect{u}_{j_0}$ in (\ref{eq:dWdt2}), then this state $\vect{u}_{j_0}$ must give positive $dW/dt$,
 proving statement 2.
 
-Thus, we have showed in two ways that transient linear amplification is a necessary
-condition for turbulence in the associated nonlinear system.  We have also shown that the amplitude of the
-transiently growing state(s) must have a significant amplitude in the turbulent state, in the following senses.
-In the first line of argument, not only must there be at least a single growing 2D mode,
-but there must be enough growing 2D modes of sufficient amplitude to balance the negative $dW_{k_x,k_y}/dt$
-of all the decaying 2D modes.
-In the second argument, in (\ref{eq:sum})
-there must not only be at least one state $j$ with an instantaneous growth rate
-$\lambda_j >0$, but the amplitudes of states with positive and negative
-$\lambda_j$ must be in balance so $\left< dW/dt \right>=0$. In a statistically steady state, there must be a balance between energy input from the instantaneously growing
-linear states and the instantaneously decaying linear states.
+Thus, we have showed in two ways that transient linear amplification
+is a necessary condition for turbulence in the associated nonlinear
+system.  We have also shown that the amplitude of the transiently
+growing state(s) must have a significant amplitude in the turbulent
+state, in the following senses.  In the first line of argument, not
+only must there be at least a single growing 2D mode, but there must
+be enough growing 2D modes of sufficient amplitude to balance the
+negative $dW_{k_x,k_y}/dt$ of all the decaying 2D modes.  In the
+second argument, in (\ref{eq:sum}) there must not only be at least one
+state $j$ with an instantaneous growth rate $\lambda_j >0$, but the
+amplitudes of states with positive and negative $\lambda_j$ must be in
+balance so $\left< dW/dt \right>=0$. In a statistically steady state,
+there must be a balance between energy input from the instantaneously
+growing linear states and energy extraction from the instantaneously
+decaying linear states.
 
 Both of the arguments above relied on the fact that the norm $W$ satisfies the same equation
 (\ref{eq:dWdt}) in both the linear and nonlinear dynamics.
@@ -1006,8 +1040,8 @@ turbulence, and the turbulent state must have a significant projection onto stat
 norm.  When the nonlinear term is turned off in a simulation of turbulence, as in figure \ref{fig:linearRestart},
 amplification in $W$ norm must occur in at least one of the 2D modes.
 The amplitude of the instantaneously growing states (instantaneous optimals) must be
-significant, enough for the associated input of free energy to balance decay of energy
-from the states that are decaying.
+significant, enough for the associated input of free energy to balance
+the states that are decaying.
 
 Considering the nonlinear and linear results together, the existence of transient amplification and
 turbulence evidently depends on whether magnetic shear is sufficiently weak that un-sheared slab mode
@@ -1015,27 +1049,28 @@ dynamics can persist.
 This geometric property can be controlled independently of the energy source of the turbulence (i.e. the density gradient),
 in contrast to turbulence driven by sheared flows where the nonuniformity of the flow plays two roles at once:
 shaping the global structure of the growing structures and providing energy to the turbulence.
-This feature makes the present system an interesting case study of sub-critical turbulence, and we are unaware of other such examples.”
+This feature makes the present system an interesting case study of subcritical turbulence, and we are unaware of other such examples.”
 
 Note that the transient linear process emphasized here and secondary instability are not mutually
 exclusive. Both are required to support turbulence.
 Some form of secondary instability (as discussed in \cite{Drake}) must be present to transfer energy out of the transiently growing linear
 structures before these structures begin to decay substantially. However, nonlinear processes cannot
 directly contribute to the system's free energy $W$, due to the annihilation of the nonlinear term
-in deriving (\ref{eq:dWdt}).
+in the derivation of (\ref{eq:dWdt}).
 
 Several effects that may be important for realistic plasma turbulence
 were not included in the present work, including toroidicity and trapped particles,
 and electromagnetic fluctuations.
 Therefore, further work is required to determine how relevant the nonlinear turbulence considered here
 is for realistic experimental parameters.  However, we at least conclude that linear stability
-need not preclude the possibility of significant turbulent particle and energy fluxes,
-and that nonlinear simulations should sometimes be initialized at finite amplitude to examine this possibility.
+need not preclude the possibility of significant turbulent particle and energy fluxes.
+%and that nonlinear simulations should sometimes be initialized at finite amplitude to examine this possibility.
 
 \begin{acknowledgments}
 This material is based upon work supported by the
-U.S. Department of Energy, Office of Science, Office of Fusion Energy Science,
-under Award Numbers DEFG0293ER54197 and DEFC0208ER54964.
+U.S. Department of Energy, Office of Fusion Energy Science,
+under Award Numbers DEFG0293ER54197 and DEFC0208ER54964,
+and the SciDAC Center for the Study of Plasma Microturbulence.
 Computations were performed on the Edison system at
 the National Energy Research Scientific Computing Center, a DOE Office of Science User Facility supported by the Office of Science of the U.S. Department of Energy under Contract No. DE-AC02-05CH11231.
 Conversations with
@@ -1046,7 +1081,7 @@ are gratefully acknowledged.
 
 \appendix
 
-\section{Linear stability in the absence of magnetic shear}
+\section{Linear instability in the absence of magnetic shear}
 \label{appendix:zeroShear}
 
 For reference, here we present the growth/damping rates and real frequencies of the
