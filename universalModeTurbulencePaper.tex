@@ -71,7 +71,7 @@
 \email[]{mattland@umd.edu}
 \affiliation{Institute for Research in Electronics and Applied Physics, University of Maryland, College Park, MD, 20742, USA}
 \author{Gabriel G. Plunk}
-\affiliation{Max Planck Institute for Plasma Physics, EURATOM Association and Max-Planck/Princeton Research Center for Plasma Physics}
+\affiliation{Max Planck Institute for Plasma Physics, Max-Planck/Princeton Research Center for Plasma Physics}
 \author{William Dorland}
 \affiliation{Institute for Research in Electronics and Applied Physics, University of Maryland, College Park, MD, 20742, USA}
 %\homepage[]{Your web page}
@@ -495,7 +495,7 @@ complex frequency as the zero-shear eigenmode.
 To demonstrate this principle across a range of parameters,
 figure  \ref{fig:comparingTransientTo0Shear} demonstrates that the
 correspondence between the finite-shear transients and zero-shear eigenmodes
-is maintained throughout the evolution of the transient and for other
+is maintained throughout the evolution of the transient, for a range of
 values of magetic shear.}
 %This comparison is shown in figure \ref{fig:comparingTransientTo0Shear}.
 In this figure, we display 25 independent simulations of linear transients,
@@ -627,6 +627,30 @@ The two collisionalities shown are $\nuee L_n / v_i = 0.1$ and $0.5$.
 \label{fig:transientAmplificationVsKy}}
 \end{figure}
 
+\changed{In the context of sheared flows in neutral fluids, a
+  relationship between transient growth and eigenvalue sensitivity has
+  been formally proved using the notion of a pseudospectrum
+  \cite{ReddyHenningson,TrefethenSubcritical,TrefethenEmbree}. The
+  $\epsilon$-pseudospectrum of a linear operator can be defined as the
+  union of the sets of eigenvalues obtained when the operator is
+  perturbed by any other operator of norm $\le \epsilon$, providing a
+  precise notion of the sensitivity of eigenvalues.  One can
+  rigorously bound the amount of possible transient growth by the
+  extent of the pseudospectrum into the unstable half of the complex
+  plane \cite{ReddyHenningson} (eq (12) of
+  \cite{TrefethenSubcritical}.)  However, for the universal
+  instability, it is not clear that changing the magnetic shear from 0
+  to a small finite value has the form of the operator perturbation
+  used to define the pseudospectrum.  The reason is that the $z$
+  domain is infinite, and for any nonzero shear, there is always some
+  $z$ for which the argument of $J_0$ is changed significantly
+  compared to the zero-shear case.  Indeed, when the shear changes
+  from 0 to any small finite value, the eigenvalues (for a range of
+  $k_y$) appear to change from unstable to stable discontinuously
+  rather than continuously \cite{Ross,Tsang}.  Thus, it may or may not
+  be possible to analyze the role of magnetic shear in the universal
+  instability using the formal theory of pseudospectra, and we leave
+  this careful mathematical analysis for future work.  }
 
 
 \section{Turbulence}

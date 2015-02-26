@@ -1,11 +1,35 @@
 We thank the referee for taking the time to carefully read the
-manuscript and offer constructive feedback.  All of the
-recommendations have been implemented, and can be identified in the
-version of the new manuscript with changes in red. For each item in
-the referee report, the relevant locations of the manuscript changes
-are the following:
+manuscript and offer constructive feedback.  
 
-1) Page ??
+Regarding suggestion #1, discussing the formal mathematical
+relationship between sensitivity of eigenmodes and transient growth
+using concepts of pseudospectra:
+
+We have added a paragraph discussing this subject to the end of
+Section III.  However, we are reluctant to assert too strong a
+connection to the mathematical theory of pseudospectra due to a
+technical complication.  In the 'destabilizing perturbations' section
+of Trefethen to which you refer, eq (13), the linear operator is given
+a perturbation of norm bounded by some finite epsilon, causing the
+eigenvalues to move by an amount that continuously goes to 0 as
+epsilon -> 0. However, all evidence suggests that when shear is
+changed from 0 to any finite value in the universal instability,
+eigenvalues change discontinuously, with the change not going to 0
+continuously as Ls/Ln -> infinity. In particular, the eigenvalues
+discontinuously change from unstable to stable for a range of k_y, as
+discussed in Refs. [25]-[26]. The reason for this discontinuity is
+presumably the fact that the z domain must be infinite to resolve
+eigenmode structures as shear goes to zero.  For any nonzero shear,
+there is always some z for which the argument of J_0 is changed
+significantly compared to the zero-shear case. Thus, to analyze the
+role of magnetic shear in the universal instability using the formal
+theory of pseudospectra, a level of mathematical care is required that
+is beyond the scope of the present manuscript.
+
+All of the other recommendations of the referee have been implemented,
+and can be identified in the version of the new manuscript with
+changes in red. For each item in the referee report, the relevant
+locations of the manuscript changes are the following:
 
 2) Pages 8-9. Rather than add the suggested new figure as part (d) of
 figure 1, we opted to add it as a new figure 2.
