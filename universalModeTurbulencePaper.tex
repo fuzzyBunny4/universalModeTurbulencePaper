@@ -48,8 +48,8 @@
 \newcommand{\nuee}{\nu_{ee}}
 \newcommand{\energy}{\mathcal{E}}
 \newcommand{\sgn}{\mathrm{sgn}}
-\newcommand{\changed}[1]{\textcolor{red}{#1}}
-%\newcommand{\changed}[1]{#1}
+%\newcommand{\changed}[1]{\textcolor{red}{#1}}
+\newcommand{\changed}[1]{#1}
 \newcommand{\transpose}{\mathrm{T}}
 
 
@@ -262,6 +262,10 @@ and
 $\left<\right>_{\vect{R}_s}$
 denote gyroaverages at fixed particle position $\vect{r}=(x,y,z)$ and guiding-center position $\vect{R}_s=(X_s,Y_s,Z_s)$.
 The distinction between $z$ and $Z_s$ may be neglected.
+\changed{
+We consider a flux tube domain, in which the fluctuating quantities can be taken
+to be periodic in $x$ and $y$.
+}
 Expanding the fluctuating quantities in spatial Fourier modes as $\Phi = \sum_{k_x,k_y} \Phi_{k_x,k_y}(t,z) \exp(i k_x x + i k_y y)$
 and $h_s = \sum_{k_x,k_y} h_{s,k_x,k_y}(t,z,\energy_s,\mu) \exp(i k_x X_s + i k_y Y_s)$,
 we may replace the gyro-averages with Bessel functions:
@@ -320,7 +324,12 @@ $\int d^3 R_s \int d^3v \left< \ldots\right>_{\vect{R}_s}
 = \int d^3 R_s \int d^3v (\ldots)
 \approx \int d^3 r \int d^3v (\ldots)
 = \int d^3 r \int d^3v \left< \ldots\right>_{\vect{r}}
-$ are used.)
+$ are used.
+\changed{
+The $v_{||} \partial h_s/\partial z$ term in (\ref{eq:gke}) has been integrated by parts;
+as detailed on page 66 of \cite{BanonNavarroThesis}, the associated boundary term vanishes for a finite $z$ domain
+using a twist-and-shift parallel boundary condition \cite{Beer1995},
+taking the fluctuation amplitude to vanish at the ends of each set of linked domains.)}
 The first term on the right-hand side of (\ref{eq:freeEnergySources})
 is negative-definite (by the $H$-theorem).
 The second term has the form of the particle and heat fluxes multiplied by
@@ -382,46 +391,59 @@ The curve for each norm is scaled by a constant so the initial amplitude is 1.
 Amplification by several orders of magnitude is observed in all norms
 before exponential decay sets in.
 
-Results for the three norms shown are quite similar,
-though the curve for the $W$ norm appears slightly higher than the other curves
-due to less decay in the initial period $t v_i / L_n <20$.
-Indeed, we find
-all results described or plotted for the remainder of this paper are quite similar
-for all of these norms.
-Henceforth we restrict our attention to the $W$ norm since it is well motivated
-by the conservation equation (\ref{eq:dWdt}).
-
-For the calculation in figure \ref{fig:transientAmplification}, the initial condition used
-is the standard ``noise'' initial condition of gs2:
-$g_s = h_s - \left< \Phi\right>_{\vect{R}_s} q_s f_{Ms} / T_s$ is set to a Maxwellian velocity distribution
-times a random complex number at each grid point in $z$.
-(The real and imaginary parts of these complex numbers are each taken from a uniform distribution on $[-1,1]$.)
-While techniques exist to calculate the optimal perturbation
-that gives maximum amplification \cite{FarrellIoannou, SquirePRL, SquireApJ}, such techniques
-are numerically challenging for this kinetic model due to the high dimensionality
-of the problem.
-The noise initial condition is a convenient shortcut, ensuring energy is likely
-to be given to a growing perturbation if one exists.
-It has been shown in \cite{Camargo, SquireApJ} that for studies of transient linear
-amplification, random initial conditions are a reasonable proxy
+For the calculation in figure \ref{fig:transientAmplification}, the
+initial condition used is the standard ``noise'' initial condition of
+gs2: $g_s = h_s - \left< \Phi\right>_{\vect{R}_s} q_s f_{Ms} / T_s$ is
+set to a Maxwellian velocity distribution times a random complex
+number at each grid point in $z$.  (The real and imaginary parts of
+these complex numbers are each taken from a uniform distribution on
+$[-1,1]$.)  While techniques exist to calculate the optimal
+perturbation that gives maximum amplification \cite{FarrellIoannou,
+  SquirePRL, SquireApJ}, such techniques are numerically challenging
+for this kinetic model due to the high dimensionality of the problem.
+The noise initial condition is a convenient shortcut, ensuring energy
+is likely to be given to a growing perturbation if one exists.  It has
+been shown in \cite{Camargo, SquireApJ} that for studies of transient
+linear amplification, random initial conditions are a reasonable proxy
 for a directly calculated optimal initial condition.
+\changed{Figure \ref{fig:transientAmplification}.b shows that 
+when the calculation is repeated many times, the dynamics of the energy in figure \ref{fig:transientAmplification}.a are typical.}
+
+Results for the three norms shown in figure
+\ref{fig:transientAmplification}.a are quite similar, though the curve
+for the $W$ norm appears slightly higher than the other curves due to
+less decay in the initial period $t v_i / L_n <20$.  Indeed, we find
+all results described or plotted for the remainder of this paper are
+quite similar for all of these norms, 
+\changed{using the locally-Maxwellian
+initial perturbations described above.  However, there are certain
+non-Maxwellian initial perturbations that can cause arbitrarily fast
+growth in the electric field energy norms but not in the $W$ norm \cite{GregIan}.
+Furthermore, it is $W$ that is conserved by the nonlinearities (recall
+the conservation equation (\ref{eq:dWdt})) and thus the $W$ norm that
+plays a role in determining bounds on the possibility of
+nonlinearly-sustained turbulence, as we will show in section
+\ref{sec:proof}.  For these reasons, we henceforth restrict our attention
+to the $W$ norm.}
 
 \begin{figure}[h!]
 % Figure generated with m20141119_01_plotGS2TransientAmplificationForPaper_figureA.m
 \includegraphics[width=3in]{m20141119_01_plotGS2TransientAmplificationForPaper_figureA_a.pdf}
+\includegraphics[width=3in]{m20150305_02_plotManyIndntclGS2TransntAmplifctnRuns.pdf}
 % Figure generated with m20141121_01_plotGS2TransientAmplificationForPaper.m
-\includegraphics[width=3in]{m20141121_01_plotGS2TransientAmplificationForPaper_figuresBC_b.pdf}
 \includegraphics[width=3in]{m20141121_01_plotGS2TransientAmplificationForPaper_figuresBC_c.pdf}
+\includegraphics[width=3in]{m20141121_01_plotGS2TransientAmplificationForPaper_figuresBC_d.pdf}
 \caption{(Color online) (a) Linear evolution for $L_s/L_n=300$, $\eta_i = \eta_e = 0$,
 $\nuee = 0.05 v_i/L_n$, and $k_y \rho_i = 1$, illustrating transient amplification in three norms.
 The initial conditions are detailed in the main text.
-(b) The amount of transient amplification may be defined relative to $t=0$ or relative
+\changed{(b) Repeating the calculation 50 times, the results are always qualitatively similar.}
+(c) The amount of transient amplification may be defined relative to $t=0$ or relative
 to the minimum that occurs shortly thereafter.
-(c) The potential structure along a field line for this example.
+(d) The potential structure along a field line for this example.
 \label{fig:transientAmplification}}
 \end{figure}
 
-Figure \ref{fig:transientAmplification}.b shows the same computation, zooming in to the initial transient period.
+Figure \ref{fig:transientAmplification}.c shows the same computation, zooming in to the initial transient period.
 Before the amplification begins around $t v_i/L_n=20$, there is an initial decay period due to strongly
 damped modes. An amplification factor may be defined relative to either to this minimum amplitude,
 or relative to the amplitude at $t=0$.
@@ -502,7 +524,12 @@ In this figure, we display 25 independent simulations of linear transients,
 varying $L_s/L_n$ between 20 and 300, and plotting the evolution of $\gamma = (2W(t))^{-1} dW/dt$ from the time
 of peak growth rate to the time at which the energy begins to decay.
 For all simulations shown, $k_y \rho_i = 2$ and $\nuee = 0.05 v_i/L_n$.
-In each case, there is very close agreement between the instantaneous growth rate of the transient
+\changed{
+Both $\left<|k_{||}|\right>$ and $\left< k_\perp \right>$ increase with time during the transient
+growth, corresponding to movement upward and rightward in figure \ref{fig:localDispersionRelation}.a.
+As a result, the effective zero-shear growth rate decreases over time.
+}
+For all transients we examined, there is very close agreement between the instantaneous growth rate of the transient
 and the `predicted' growth rate from the zero-shear dispersion relation.
 Thus, we can conclude that the transiently growing structures are closely related to the zero-shear
 eigenmodes.  
@@ -511,7 +538,12 @@ eigenmodes.
 
 
 \begin{figure}[h!]
-% Data generated on Edison in /global/scratch2/sd/landrema/20150109-01-coderunner-edison-0shearUniversalInstability/vnewk_e_0p05
+% Data for finite-shear transients were generated on Edison in
+% /global/scratch2/sd/landrema/20141121-01-coderunner-edison-transientAmplificationScans/aky2/
+%
+% Data for zero-shear dispersion relation were generated on Edison in 
+% /global/scratch2/sd/landrema/20150109-01-coderunner-edison-0shearUniversalInstability/vnewk_e_0p05
+%
 % Figure generated with m20150109_04_cmprngTransientGrowthRateTo0ShearForPaper.m
 \includegraphics[width=4in]{m20150109_04_cmprngTransientGrowthRateTo0ShearForPaper.pdf}
 \caption{(Color online)
@@ -526,11 +558,34 @@ the time of maximum growth rate (at the $+$ symbols) until decay begins.
 \label{fig:comparingTransientTo0Shear}}
 \end{figure}
 
+
+
 For the range of $k_{||}$ and $k_{\perp}$ values computed for the transient structures
 of figure \ref{fig:comparingTransientTo0Shear}, the zero-shear dispersion relation
 is well approximated by the approximate analytic dispersion relation (\ref{eq:approxRoot}).  Thus, we can also conclude
 that the transient structures, like the zero-shear eigenmodes,
 are driven by the combination of resonant electrons and the density gradient.
+
+\changed{ In contrast to the agreement shown in figure
+  \ref{fig:comparingTransientTo0Shear} for the amplification phase
+  following the maximum growth rate, we do not find such close
+  agreement between the zero-shear dispersion relation and the
+  finite-shear dynamics for very early times, before the maximum
+  growth rate occurs.  In this initial period, a single dominant wave
+  packet has not yet overtaken other fluctuations present in the
+  initial random noise.  We also do not see such close agreement
+  between the zero-shear and finite-shear behavior during the decay
+  phase of the latter, i.e. at large times.  The finite-shear decay
+  rate as $t \to \infty$ corresponds to an eigenvalue, and it was
+  established in previous work such as \cite{Ross,Tsang,Antonsen} that
+  the finite-shear eigenvalues are not continuously related to the
+  zero-shear eigenvalues.  In an eigenmode, points at all $z$ have a
+  coherent time-dependence.  Thus, this damping rate is determined by
+  a coherent interaction between points of different
+  $k_\perp(z)=k_y\sqrt{1+(z/L_s)^2}$, and between all $k_{||}$ Fourier
+  components.  This damping rate is thus not well approximated by the
+  zero-shear dispersion relation which assumes a single $k_\perp$ and
+  single $k_{||}$. }
 
 Transient amplification is exponentially reduced by increasing magnetic shear,
 as illustrated in figure \ref{fig:transientAmplificationVsLsOverLn}.
@@ -578,10 +633,6 @@ at larger $k_y$ while having much less effect at smaller $k_y$.
 This kinetic problem is similar to conventional hydrodynamics in that for both cases, non-modal amplification
 decreases with increasing collisional dissipation (associated with viscosity in the Navier-Stokes equation
 for the hydrodynamic case.)
-However, the kinetic problem here is rather different
-from the hydrodynamic case in the sensitivity of the transient amplification
-to the geometric parameter $L_s/L_n$,
-which is not associated with entropy-producing collisions.
 
 
 \begin{figure}[h!]
@@ -644,13 +695,14 @@ The two collisionalities shown are $\nuee L_n / v_i = 0.1$ and $0.5$.
   used to define the pseudospectrum.  The reason is that the $z$
   domain is infinite, and for any nonzero shear, there is always some
   $z$ for which the argument of $J_0$ is changed significantly
-  compared to the zero-shear case.  Indeed, when the shear changes
-  from 0 to any small finite value, the eigenvalues (for a range of
-  $k_y$) appear to change from unstable to stable discontinuously
-  rather than continuously \cite{Ross,Tsang}.  Thus, it may or may not
-  be possible to analyze the role of magnetic shear in the universal
-  instability using the formal theory of pseudospectra, and we leave
-  this careful mathematical analysis for future work.  }
+  compared to the zero-shear case.  Indeed, all evidence suggests that
+  when the shear changes from 0 to any small finite value, the
+  eigenvalues (for a range of ky) change from unstable to stable
+  discontinuously rather than continuously \cite{Ross,Tsang}.  Thus,
+  it may or may not be possible to understand the role of magnetic shear
+  in the universal instability using the formal theory of
+  pseudospectra, and we leave this careful mathematical analysis for
+  future work.  }
 
 
 \section{Turbulence}
@@ -750,8 +802,15 @@ Another method for initiating the nonlinear instability is to begin with a suffi
 temperature gradient to bring about linear instability, and then to reduce the temperature gradient
 once the turbulence reaches a sufficient amplitude \cite{Drake}.
 A third effective method, the one used in figure \ref{fig:amplitudeDependence},
-is to initialize with one of the least-damped linear eigenmodes scaled up to appropriate amplitude, with noise in the other modes.  We find this method to be particularly convenient since variation in the stable time step
+is to initialize with one of the least-damped linear eigenmodes scaled up to appropriate amplitude, with noise in the other modes.  
+We find this method to be particularly convenient since variation in the stable time step
 is minimized.
+\changed{
+(In both simulations shown in figure  \ref{fig:amplitudeDependence}, the $k_y \rho_i=0$ Fourier component is initialized to 0,
+but this component (and the $k_y \rho_i=\pm 0.2$ components) grow up quickly for the following reason. Since observable quantities are real, there is a large $k_y \rho_i=-0.1$
+Fourier component present in the initial condition which is the complex conjugate of the large $k_y \rho_i=+0.1$ component shown,
+and these two components interact nonlinearly to drive components at the sum and difference wave numbers.)
+}
 
 \begin{figure}[h!]
 % Datasets are in /global/scratch2/sd/landrema/20141112-01-coderunner-edison-subcritical-box-lowLsOverLn
@@ -914,6 +973,16 @@ Put another way, a necessary condition
 for turbulence (in the absence of linear instability) is that typical states of the turbulence
 can be transiently amplified. Furthermore, the energy growth in the 2D modes that are amplified
 must be sufficient to balance the energy decay from the damped 2D modes.
+
+\changed{ We note that while $dW/dt$ is continuous when the nonlinear term
+  is turned off, each $dW_{k_x,k_y}/dt$ is generally not. The reason is that in order to annihilate the
+  nonlinear term in the derivation of (\ref{eq:dWdt})-(\ref{eq:freeEnergySources}), it is necessary to
+  integrate over $x$ and $y$, i.e. sum over $k_x$ and $k_y$. Thus, while (\ref{eq:dWdt}) is
+  identical for the nonlinear and linear dynamics, the analogous
+  equation for $dW_{k_x,k_y}/dt$ is different for the nonlinear and linear
+  dynamics. Removing the nonlinear term therefore causes a
+  discontinuous change in $dW_{k_x,k_y}/dt$.
+}
 
 Next, we present a second argument for the necessity of transient amplification.
 This argument is based on linear algebra and closely follows \cite{DelSoleNecessity}.
