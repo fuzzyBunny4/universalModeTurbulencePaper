@@ -1,61 +1,218 @@
-%\documentclass{amsart}
-%\documentclass[aip,graphicx]{revtex4-1}
-\documentclass[12pt,superscriptaddress]{revtex4}
-\usepackage{latexsym, color, graphicx}
-%\usepackage{latexsym, color, graphicx, comment}
-\usepackage{amssymb}
-\usepackage{amsmath}
+% Copyright (C) 2011 Cambridge University Press
 
-%\graphicspath{{../MATLAB/}}
+\NeedsTeXFormat{LaTeX2e}
 
-\newcommand{\red}[1]{\textcolor{red}{#1}}
-\newcommand{\vect}[1]{\mbox{\boldmath $#1$}}
-\newcommand{\erf}{\mathrm{erf}}
-\newcommand{\PS}{Pfirsch-Schl\"{u}ter~}
-\newcommand{\ExB}{\vect{E}\times\vect{B}}
-\newcommand{\Cnl}{C_{\mathrm{nl}a}}
-\newcommand{\vma}{\vect{v}_{\mathrm{m}a}}
-\newcommand{\vm}{\vect{v}_{\mathrm{m}}}
-\newcommand{\vda}{\vect{v}_{\mathrm{d}a}}
-\newcommand{\vE}{\vect{v}_{E}}
-\newcommand{\vdao}{\vect{v}_{\mathrm{d}a0}}
-\newcommand{\vdo}{\vect{v}_{\mathrm{d}0}}
-\newcommand{\vEo}{\vect{v}_{E0}}
-\newcommand{\vpar}{v_{||}}
-\newcommand{\vperp}{v_{\bot}}
-\newcommand{\rhop}{\rho_{\theta}}
-\newcommand{\rT}{r_{T}}
-\newcommand{\Ti}{T_{\mathrm{i}}}
-\newcommand{\rTi}{r_{T\mathrm{i}}}
-\newcommand{\rTe}{r_{T\mathrm{e}}}
-\newcommand{\reta}{r_{\eta}}
-\newcommand{\rn}{r_{n}}
-\newcommand{\rperp}{r_\bot}
-\newcommand{\fM}{f_{\mathrm{M}}}
-\newcommand{\fMa}{f_{\mathrm{M}a}}
-\newcommand{\fMi}{f_{\mathrm{M}i}}
-\newcommand{\fMe}{f_{\mathrm{Me}}}
-\newcommand{\fe}{f_{\mathrm{e}}}
-\newcommand{\Te}{T_{\mathrm{e}}}
-\newcommand{\vth}{v_{\mathrm{th}}}
-\newcommand{\nuii}{\nu_{ii}}
-\newcommand{\nuPrime}{\hat{\nu}}
-\newcommand{\gradpar}{\nabla_{||}}
-\newcommand{\kpar}{k_{||}}
-\newcommand{\psia}{\psi_0}
-\newcommand{\psiaHat}{\hat{\psi}_0}
+\documentclass{jpp}
+
+\usepackage{graphicx}
+\usepackage{natbib}
+
+% See if the author has AMS Euler fonts installed: If they have, attempt
+% to use the 'upmath' package to provide upright math.
+\ifCUPmtlplainloaded \else
+  \checkfont{eurm10}
+  \iffontfound
+    \IfFileExists{upmath.sty}
+      {\typeout{^^JFound AMS Euler Roman fonts on the system,
+                   using the 'upmath' package.^^J}%
+       \usepackage{upmath}}
+      {\typeout{^^JFound AMS Euler Roman fonts on the system, but you
+                   dont seem to have the}%
+       \typeout{'upmath' package installed. JPP.cls can take advantage
+                 of these fonts, if you use 'upmath' package.^^J}%
+       \providecommand\upi{\pi}%
+      }
+  \else
+    \providecommand\upi{\pi}%
+  \fi
+\fi
+
+% See if the author has AMS symbol fonts installed: If they have, attempt
+% to use the 'amssymb' package to provide the AMS symbol characters.
+
+\ifCUPmtlplainloaded \else
+  \checkfont{msam10}
+  \iffontfound
+    \IfFileExists{amssymb.sty}
+      {\typeout{^^JFound AMS Symbol fonts on the system, using the
+                'amssymb' package.^^J}%
+       \usepackage{amssymb}%
+       \let\le=\leqslant  \let\leq=\leqslant
+       \let\ge=\geqslant  \let\geq=\geqslant
+      }{}
+  \fi
+\fi
+
+% See if the author has the AMS 'amsbsy' package installed: If they have,
+% use it to provide better bold math support (with \boldsymbol).
+
+\ifCUPmtlplainloaded \else
+  \IfFileExists{amsbsy.sty}
+    {\typeout{^^JFound the 'amsbsy' package on the system, using it.^^J}%
+     \usepackage{amsbsy}}
+    {\providecommand\boldsymbol[1]{\mbox{\boldmath $##1$}}}
+\fi
+
+%%% Example macros (some are not used in this sample file) %%%
+
+% For units of measure
+\newcommand\dynpercm{\nobreak\mbox{$\;$dyn\,cm$^{-1}$}}
+\newcommand\cmpermin{\nobreak\mbox{$\;$cm\,min$^{-1}$}}
+
+% Various bold symbols
+\providecommand\bnabla{\boldsymbol{\nabla}}
+\providecommand\bcdot{\boldsymbol{\cdot}}
+\newcommand\biS{\boldsymbol{S}}
+\newcommand\etb{\boldsymbol{\eta}}
+
+% For multiletter symbols
+\newcommand\Real{\mbox{Re}} % cf plain TeX's \Re and Reynolds number
+\newcommand\Imag{\mbox{Im}} % cf plain TeX's \Im
+\newcommand\Rey{\mbox{\textit{Re}}}  % Reynolds number
+\newcommand\Pran{\mbox{\textit{Pr}}} % Prandtl number, cf TeX's \Pr product
+\newcommand\Pen{\mbox{\textit{Pe}}}  % Peclet number
+\newcommand\Ai{\mbox{Ai}}            % Airy function
+\newcommand\Bi{\mbox{Bi}}            % Airy function
+
+% For sans serif characters:
+% The following macros are setup in JPP.cls for sans-serif fonts in text
+% and math.  If you use these macros in your article, the required fonts
+% will be substitued when you article is typeset by the typesetter.
+%
+% \textsfi, \mathsfi   : sans-serif slanted
+% \textsfb, \mathsfb   : sans-serif bold
+% \textsfbi, \mathsfbi : sans-serif bold slanted (doesnt exist in CM fonts)
+%
+% For san-serif roman use \textsf and \mathsf as normal.
+%
+\newcommand\ssC{\mathsf{C}}    % for sans serif C
+\newcommand\sfsP{\mathsfi{P}}  % for sans serif sloping P
+\newcommand\slsQ{\mathsfbi{Q}} % for sans serif bold-sloping Q
+
+% Hat position
+\newcommand\hatp{\skew3\hat{p}}      % p with hat
+\newcommand\hatR{\skew3\hat{R}}      % R with hat
+\newcommand\hatRR{\skew3\hat{\hatR}} % R with 2 hats
+\newcommand\doubletildesigma{\skew2\tilde{\skew2\tilde{\Sigma}}}
+%       italic Sigma with double tilde
+
+% array strut to make delimiters come out right size both ends
+\newsavebox{\astrutbox}
+\sbox{\astrutbox}{\rule[-5pt]{0pt}{20pt}}
+\newcommand{\astrut}{\usebox{\astrutbox}}
+
+\newcommand\GaPQ{\ensuremath{G_a(P,Q)}}
+\newcommand\GsPQ{\ensuremath{G_s(P,Q)}}
+\newcommand\p{\ensuremath{\partial}}
+\newcommand\tti{\ensuremath{\rightarrow\infty}}
+\newcommand\kgd{\ensuremath{k\gamma d}}
+\newcommand\shalf{\ensuremath{{\scriptstyle\frac{1}{2}}}}
+\newcommand\sh{\ensuremath{^{\shalf}}}
+\newcommand\smh{\ensuremath{^{-\shalf}}}
+\newcommand\squart{\ensuremath{{\textstyle\frac{1}{4}}}}
+\newcommand\thalf{\ensuremath{{\textstyle\frac{1}{2}}}}
+\newcommand\Gat{\ensuremath{\widetilde{G_a}}}
+\newcommand\ttz{\ensuremath{\rightarrow 0}}
+\newcommand\ndq{\ensuremath{\frac{\mbox{$\partial$}}{\mbox{$\partial$} n_q}}}
+\newcommand\sumjm{\ensuremath{\sum_{j=1}^{M}}}
+\newcommand\pvi{\ensuremath{\int_0^{\infty}%
+  \mskip \ifCUPmtlplainloaded -30mu\else -33mu\fi -\quad}}
+
+\newcommand\etal{\mbox{\textit{et al.}}}
+\newcommand\etc{etc.\ }
+\newcommand\eg{e.g.\ }
+
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{statement}{Statement}
+
+\title[Generalized universal instability]{Generalized universal instability: Transient linear amplification and subcritical turbulence}
+
+%\author[A. N. Other, H.-C. Smith and J. Q. Public]%
+%{A\ls L\ls A\ls N\ns N.\ns O\ls T\ls H\ls E\ls R$^1$%
+%  \thanks{Email address for correspondence: plaeditorial@cambridge.org},\ns
+%H.\ls-\ls C.\ns S\ls M\ls I\ls T\ls H$^1$\break
+%\and J.\ns Q.\ns P\ls U\ls B\ls L\ls I\ls C$^2$}
+%
+%% NOTE: A full address must be provided: department, university/institution, town/city, zipcode/postcode, country.
+%\affiliation{$^1$Plasma Physics Laboratory, University of America,
+%Somewhere, IN 12345, USA\\[\affilskip]
+%$^2$Department of Physics, University of
+%Camford, Academic Street, Camford CF3 5QL, UK}
+
+\author[Matt Landreman, Gabriel G. Plunk and William Dorland]
+{M\ls A\ls T\ls T\ns   L\ls A\ls N\ls D\ls R\ls E\ls M\ls A\ls N$^1$
+  \thanks{Email address for correspondence: mattland@umd.edu},\ns
+G\ls A\ls B\ls R\ls I\ls E\ls L\ns   G.\ns  P\ls L\ls U\ls N\ls K$^2$\break
+\and W\ls I\ls L\ls L\ls I\ls A\ls M\ns   D\ls O\ls R\ls L\ls A\ls N\ls D$^1$}
+
+\affiliation{$^1$Institute for Research in Electronics and Applied Physics, University of Maryland, College Park, MD, 20742, USA\\[\affilskip]
+$^2$Max Planck Institute for Plasma Physics, Max-Planck/Princeton Research Center for Plasma Physics,
+17491 Greifswald, Germany}
+
+
+\pubyear{2015}
+\volume{??}
+\pagerange{??}
+% Do not enter received and revised dates. These will be entered by the editorial office.
+\date{?; revised ?; accepted ?. - To be entered by editorial office}
+%\setcounter{page}{1}
+\begin{document}
+
+
+%\documentclass[12pt,superscriptaddress]{revtex4}
+%\usepackage{latexsym, color, graphicx}
+%\usepackage{amssymb}
+%\usepackage{amsmath}
+
+%\newcommand{\red}[1]{\textcolor{red}{#1}}
+%\newcommand{\vect}[1]{\mbox{\boldmath $#1$}}
+\newcommand{\vect}[1]{\boldsymbol{$#1$}}
+%\newcommand{\erf}{\mathrm{erf}}
+%\newcommand{\PS}{Pfirsch-Schl\"{u}ter~}
+%\newcommand{\ExB}{\vect{E}\times\vect{B}}
+%\newcommand{\Cnl}{C_{\mathrm{nl}a}}
+%\newcommand{\vma}{\vect{v}_{\mathrm{m}a}}
+%\newcommand{\vm}{\vect{v}_{\mathrm{m}}}
+%\newcommand{\vda}{\vect{v}_{\mathrm{d}a}}
+%\newcommand{\vE}{\vect{v}_{E}}
+%\newcommand{\vdao}{\vect{v}_{\mathrm{d}a0}}
+%\newcommand{\vdo}{\vect{v}_{\mathrm{d}0}}
+%\newcommand{\vEo}{\vect{v}_{E0}}
+%\newcommand{\vpar}{v_{||}}
+%\newcommand{\vperp}{v_{\bot}}
+%\newcommand{\rhop}{\rho_{\theta}}
+%\newcommand{\rT}{r_{T}}
+%\newcommand{\Ti}{T_{\mathrm{i}}}
+%\newcommand{\rTi}{r_{T\mathrm{i}}}
+%\newcommand{\rTe}{r_{T\mathrm{e}}}
+%\newcommand{\reta}{r_{\eta}}
+%\newcommand{\rn}{r_{n}}
+%\newcommand{\rperp}{r_\bot}
+%\newcommand{\fM}{f_{\mathrm{M}}}
+%\newcommand{\fMa}{f_{\mathrm{M}a}}
+%\newcommand{\fMi}{f_{\mathrm{M}i}}
+%\newcommand{\fMe}{f_{\mathrm{Me}}}
+%\newcommand{\fe}{f_{\mathrm{e}}}
+%\newcommand{\Te}{T_{\mathrm{e}}}
+%\newcommand{\vth}{v_{\mathrm{th}}}
+%\newcommand{\nuii}{\nu_{ii}}
+%\newcommand{\nuPrime}{\hat{\nu}}
+%\newcommand{\gradpar}{\nabla_{||}}
+%\newcommand{\kpar}{k_{||}}
+%\newcommand{\psia}{\psi_0}
+%\newcommand{\psiaHat}{\hat{\psi}_0}
 \newcommand{\omegase}{\omega_{*}}
 \newcommand{\nuee}{\nu_{ee}}
 \newcommand{\energy}{\mathcal{E}}
-\newcommand{\sgn}{\mathrm{sgn}}
-%\newcommand{\changed}[1]{\textcolor{red}{#1}}
-\newcommand{\changed}[1]{#1}
+%\newcommand{\sgn}{\mathrm{sgn}}
+\newcommand{\sgn}{\mbox{sgn}}
+%%\newcommand{\changed}[1]{\textcolor{red}{#1}}
+%\newcommand{\changed}[1]{#1}
 \newcommand{\transpose}{\mathrm{T}}
 
 
-\begin{document}
-
-\title{Generalized universal instability: Transient linear amplification and subcritical turbulence}
 
 
 % repeat the \author .. \affiliation  etc. as needed
@@ -67,23 +224,7 @@
 % \affiliation command applies to all authors since the last \affiliation command.
 % The \affiliation command should follow the other information.
 
-\author{Matt Landreman}
-\email[]{mattland@umd.edu}
-\affiliation{Institute for Research in Electronics and Applied Physics, University of Maryland, College Park, MD, 20742, USA}
-\author{Gabriel G. Plunk}
-\affiliation{Max Planck Institute for Plasma Physics, Max-Planck/Princeton Research Center for Plasma Physics}
-\author{William Dorland}
-\affiliation{Institute for Research in Electronics and Applied Physics, University of Maryland, College Park, MD, 20742, USA}
-%\homepage[]{Your web page}
-%\thanks{}
-%\author{co-authors}
-
-% Collaboration name, if desired (requires use of superscriptaddress option in \documentclass).
-% \noaffiliation is required (may also be used with the \author command).
-%\collaboration{}
-%\noaffiliation
-
-\date{\today}
+\maketitle
 
 \begin{abstract}
 
@@ -107,9 +248,9 @@ yield transient linear amplification of the gyrokinetic free energy.
 
 \end{abstract}
 
-\pacs{}% insert suggested PACS numbers in braces on next line
-
-\maketitle %\maketitle must follow title, authors, abstract and \pacs
+\begin{PACS}
+???
+\end{PACS}
 
 
 \section{Introduction}
@@ -117,41 +258,41 @@ yield transient linear amplification of the gyrokinetic free energy.
 Despite the usefulness of linear eigenmode analysis in many contexts,
 it has been established that
 eigenmode analysis can in practice give misleading predictions
-about the stability of various systems \cite{TrefethenEmbree}.
+about the stability of various systems \citep{TrefethenEmbree}.
 In particular, turbulence may be sustained in a number of fluid systems
 despite the absence of any unstable eigenmodes,
 a phenomenon that may be called ``subcritical turbulence''.
-The first systems known to display this behavior were certain sheared flow patterns in
+The first systems known to display this behaviour were certain sheared flow patterns in
 neutral fluids, such as plane Poiseuille or plane Couette flow
-\cite{Tillmark,TrefethenSubcritical,Grossman}.
+\citep{Tillmark,TrefethenSubcritical,Grossman}.
 Later, sustained turbulence was seen
 in fluid simulations of several plasma systems with no absolute linear instabilities
-\cite{Waltz, Scott1, Scott2, Drake}.
+\citep{Waltz, Scott1, Scott2, Drake}.
 More recently,
 turbulence in the absence of linear instability has been seen in kinetic plasma simulations involving
-sheared equilibrium flow \cite{EdmundPRL, BarnesRotation}.
+sheared equilibrium flow \citep{EdmundPRL, BarnesRotation}.
 These examples demonstrate that linear eigenmode analysis can give
-deceiving predictions for nonlinear behavior,
+deceiving predictions for nonlinear behaviour,
 a conclusion supported by other studies of plasma turbulence in which
 linear instability exists, but
 the fluctuations in saturated nonlinear turbulence are different in character from the linear
-eigenmodes \cite{Biskamp,Friedman1,Friedman2}.
+eigenmodes \citep{Biskamp,Friedman1,Friedman2}.
 
 For the cases of turbulence without absolute linear instability in the presence of sheared flows,
 for both neutral fluids and plasmas, the phenomenon of transient linear amplification
 appears to be important
-\cite{TrefethenSubcritical, FarrellIoannou, Grossman, DelSoleSurvey, TrefethenEmbree, Schmid, Newton, Alex}.
+\citep{TrefethenSubcritical, FarrellIoannou, Grossman, DelSoleSurvey, TrefethenEmbree, Schmid, Newton, Alex}.
 Also known as non-modal amplification, transient amplification is a period of growth before
 the exponential decay sets in.
 A necessary (but not sufficient) condition for transient amplification
 is that the linear operator must not have a complete orthogonal set of eigenvectors.
 Analysis of transient amplification has also been applied to plasma systems in which
-linear instability exists but transient linear behavior may be
-more important \cite{Camargo, Camporeale2010, Friedman2, SquirePRL, SquireApJ}.
+linear instability exists but transient linear behaviour may be
+more important \citep{Camargo, Camporeale2010, Friedman2, SquirePRL, SquireApJ}.
 
 In the present work, we consider the phenomena of transient amplification and turbulence
 without instability for the case of the weakly-collisional
-plasma drift wave driven by a density gradient\cite{Galeev,Krall3},
+plasma drift wave driven by a density gradient \citep{Galeev,Krall3},
 neglecting toroidal effects.
 This oscillation has been called the ``universal instability'' as it was at first
 thought to be linearly unstable in any plasma with a density gradient.
@@ -161,23 +302,23 @@ It was later established that when any amount of magnetic shear is included in t
 no matter how small,
 the eigenmodes with $k_y \rho_i \ll 1$ become linearly damped,
 where $k_y$ is the perpendicular wavenumber and $\rho_i$ is the ion gyroradius
-\cite{Ross, Tsang, Antonsen}.
+\citep{Ross, Tsang, Antonsen}.
 However, instability can persist at $k_y \rho_i \ge 1$ when the collisionality is
-very low \cite{usUniversalInstability}.
-When both magnetic shear and modest collisions are included \cite{usUniversalInstability},
+very low \citep{usUniversalInstability}.
+When both magnetic shear and modest collisions are included,
 the mode becomes linearly stable at all $k_y \rho_i$.
 It is this latter situation that we will consider here.
 (As an aside, the small-but-finite-shear eigenmodes
 are different from zero-shear modes not only for the
 universal instability, but also for the slab ion-temperature-gradient (ITG) instability.
-Specifically, in \cite{Plunk2014}, considering the slab mode by setting
+Specifically, in \citet{Plunk2014}, considering the slab mode by setting
 curvature drift effects $\omega_d$ to 0, the small-shear limit of (19) is different from
 the zero shear result (12).)
 
-Fluid versions of this drift wave system were investigated in \cite{Scott1,Scott2,Drake}.
-%using a model with three fluctuating quantities (density, electrostatic potential, and parallel velocity).
+Fluid versions of this drift wave system were investigated by \citet{Scott1,Scott2}
+and \citet{Drake}.
 In these models, all linear modes were damped, yet nonlinearly, turbulence could be sustained.
-In \cite{Drake} it was pointed out that an important secondary
+In \citet{Drake} it was pointed out that an important secondary
 instability in this system is a drift wave rotated by $\pi/2$ in the plane
 perpendicular to the magnetic field, since the stabilizing effects of magnetic
 shear are reduced in this orientation.
@@ -186,14 +327,14 @@ perturbed density gradient, the latter represented in the nonlinear term.
 However, since the nonlinearity is conservative, the rotated drift wave does not inject energy
 into the system in the way that can be done by a perturbation feeding off the density gradient of the equilibrium.
 Several authors have also investigated transient linear effects in fluid drift wave models
-\cite{Camargo, Friedman1, Friedman2}. However, these studies did not
+\citep{Camargo, Friedman1, Friedman2}. However, these studies did not
 include magnetic shear, which we will find to have a very strong effect on
-some aspects of the transient behavior.
+some aspects of the transient behaviour.
 
 In the following sections, we establish three results concerning the drift wave system in slab geometry
 with magnetic shear,
 extending previous work by considering a kinetic description and exploring the role of transient linear amplification.
-For these studies, the initial-value gyrokinetic code gs2 \cite{gs2} will be used
+For these studies, the initial-value gyrokinetic code gs2 \citep{gs2} will be used
 for numerical computations.
 First, in section \ref{sec:transient} we demonstrate that
 significant transient linear amplification is possible in this system.
@@ -203,11 +344,11 @@ in the dependence of their instantaneous growth rate on wavenumber,
 though the transients are sensitive to magnetic shear
 in their global time-dependence.
 Second, in section \ref{sec:turbulence} we demonstrate that universal-mode turbulence without linear
-instability, seen previously in fluid models in \cite{Scott1,Scott2,Drake},
+instability, seen previously in fluid models  \citep{Scott1,Scott2,Drake},
 is also possible in the gyrokinetic model.
 Finally, we prove there is a relationship between
 transient linear amplification and nonlinear turbulence in this system,
-using similar arguments to the proof for hydrodynamics in \cite{DelSoleNecessity}
+using similar arguments to the proof for hydrodynamics in \citet{DelSoleNecessity}
 and arriving at similar conclusions.
 Specifically, if the physical parameters are such that turbulence can be sustained,
 typical states of the turbulence must be amplified linearly for some amount of time, even if these states
@@ -223,7 +364,7 @@ for some constant $B$ and shear length $L_s$.  A field-aligned coordinate system
 is introduced: $x = x', \;y = y' - x' z' / L_s, \; z = z'$,
 so $\vect{B}\cdot\nabla x = \vect{B}\cdot\nabla y = 0$ and $\vect{B}\cdot\nabla z = B$.
 In this geometry, we consider the nonlinear electrostatic
-gyrokinetic equation \cite{FriemanChen},
+gyrokinetic equation \citep{FriemanChen},
 dropping toroidal effects:
 \begin{eqnarray}
 \label{eq:gke}
@@ -254,7 +395,7 @@ and $f_{Ms}$ is the leading-order Maxwellian.
 The scale length of the equilibrium density $n$ is $L_n = -n/(dn/dx)$,
 $q_i = e = -q_e$ is the proton charge,
 $T_s$ is the species temperature,
-\changed{$\eta_s=(d \ln T_s/dx)/(d \ln n/dx)$,}
+$\eta_s=(d \ln T_s/dx)/(d \ln n/dx)$,
 $C_s$ is the collision operator,
 and
 $\left<\right>_{\vect{r}}$
@@ -262,10 +403,8 @@ and
 $\left<\right>_{\vect{R}_s}$
 denote gyroaverages at fixed particle position $\vect{r}=(x,y,z)$ and guiding-center position $\vect{R}_s=(X_s,Y_s,Z_s)$.
 The distinction between $z$ and $Z_s$ may be neglected.
-\changed{
 We consider a flux tube domain, in which the fluctuating quantities can be taken
 to be periodic in $x$ and $y$.
-}
 Expanding the fluctuating quantities in spatial Fourier modes as $\Phi = \sum_{k_x,k_y} \Phi_{k_x,k_y}(t,z) \exp(i k_x x + i k_y y)$
 and $h_s = \sum_{k_x,k_y} h_{s,k_x,k_y}(t,z,\energy_s,\mu) \exp(i k_x X_s + i k_y Y_s)$,
 we may replace the gyro-averages with Bessel functions:
@@ -293,8 +432,8 @@ are independent of $k_x$, and the eigenmode structures are independent of $k_x$
 up to this translation in $z$.
 
 One important property of the system (\ref{eq:gke})-(\ref{eq:qn})
-is the free energy conservation equation \cite{Howes, AbelReview}
-obtained from the $\sum_s \int d^3R_s \int d^3v (T_s h_s/f_{Ms}) (\ldots)$ moment of (\ref{eq:gke}):
+is the free energy conservation equation \citep{Sugama1996, Howes, AbelReview}
+obtained by applying the operation $\sum_s \int d^3R_s \int d^3v (T_s h_s/f_{Ms}) (\ldots)$ to (\ref{eq:gke}):
 \begin{equation}
 \frac{d W}{d t} = S(h_i,h_e),
 \label{eq:dWdt}
@@ -325,11 +464,10 @@ $\int d^3 R_s \int d^3v \left< \ldots\right>_{\vect{R}_s}
 \approx \int d^3 r \int d^3v (\ldots)
 = \int d^3 r \int d^3v \left< \ldots\right>_{\vect{r}}
 $ are used.
-\changed{
 The $v_{||} \partial h_s/\partial z$ term in (\ref{eq:gke}) has been integrated by parts;
-as detailed on page 66 of \cite{BanonNavarroThesis}, the associated boundary term vanishes for a finite $z$ domain
-using a twist-and-shift parallel boundary condition \cite{Beer1995},
-taking the fluctuation amplitude to vanish at the ends of each set of linked domains.)}
+as detailed in \citet[pp. 66]{BanonNavarroThesis}, the associated boundary term vanishes for a finite $z$ domain
+using a twist-and-shift parallel boundary condition \citep{Beer1995},
+taking the fluctuation amplitude to vanish at the ends of each set of linked domains.)
 The first term on the right-hand side of (\ref{eq:freeEnergySources})
 is negative-definite (by the $H$-theorem).
 The second term has the form of the particle and heat fluxes multiplied by
@@ -363,7 +501,7 @@ One then finds a frequency with positive imaginary part $\propto i \sqrt{\pi} / 
 indicating the instability is due to resonant electrons in the presence of a density gradient.
 When an arbitrarily small amount of magnetic shear is introduced, the global eigenmodes are
 no longer recognizable as the unsheared slab modes, and indeed are absolutely stable
-for $k_y\rho_i \ll 1$ \cite{Ross,Tsang}.  One might reasonably expect weakly sheared systems with
+for $k_y\rho_i \ll 1$ \citep{Ross,Tsang}.  One might reasonably expect weakly sheared systems with
 stable global eigenmodes to exhibit transient linear amplification, with the number of $e$-foldings
 of amplification tending to infinity as the magnetic shear tends to zero.  In the following section,
 we will show this hypothesis to be true, and thereby demonstrate the apparently singular limit of zero shear
@@ -382,8 +520,8 @@ $m_i = 3672 m_e$,
 $T_e = T_i$, and $\eta_i = \eta_e = 0$.
 The results are independent of $k_x$ up to a translation in $z$, as noted previously.
 Collisions are also included to eliminate absolute instability for $k_y \rho_i \ge 0.7$,
-as discussed in \cite{usUniversalInstability},
-using the collision operators detailed in Ref. \cite{Abel}.
+as discussed in \citet{usUniversalInstability},
+using the collision operators detailed in \citet{Abel}.
 As transient amplification generally depends on the choice
 of norm, here we compare three reasonable quadratic norms: $W$, $\int dz |\Phi|^2$,
 and the maximum of $|\Phi|^2$ along $z$.
@@ -398,16 +536,16 @@ set to a Maxwellian velocity distribution times a random complex
 number at each grid point in $z$.  (The real and imaginary parts of
 these complex numbers are each taken from a uniform distribution on
 $[-1,1]$.)  While techniques exist to calculate the optimal
-perturbation that gives maximum amplification \cite{FarrellIoannou,
+perturbation that gives maximum amplification \citep{FarrellIoannou,
   SquirePRL, SquireApJ}, such techniques are numerically challenging
 for this kinetic model due to the high dimensionality of the problem.
 The noise initial condition is a convenient shortcut, ensuring energy
 is likely to be given to a growing perturbation if one exists.  It has
-been shown in \cite{Camargo, SquireApJ} that for studies of transient
+been shown in \citet{Camargo} and \citet{SquireApJ} that for studies of transient
 linear amplification, random initial conditions are a reasonable proxy
 for a directly calculated optimal initial condition.
-\changed{Figure \ref{fig:transientAmplification}.b shows that 
-when the calculation is repeated many times, the dynamics of the energy in figure \ref{fig:transientAmplification}.a are typical.}
+Figure \ref{fig:transientAmplification}.b shows that 
+when the calculation is repeated many times, the dynamics of the energy in figure \ref{fig:transientAmplification}.a are typical.
 
 Results for the three norms shown in figure
 \ref{fig:transientAmplification}.a are quite similar, though the curve
@@ -415,28 +553,36 @@ for the $W$ norm appears slightly higher than the other curves due to
 less decay in the initial period $t v_i / L_n <20$.  Indeed, we find
 all results described or plotted for the remainder of this paper are
 quite similar for all of these norms, 
-\changed{using the locally-Maxwellian
+using the locally-Maxwellian
 initial perturbations described above.  However, there are certain
 non-Maxwellian initial perturbations that can cause arbitrarily fast
-growth in the electric field energy norms but not in the $W$ norm \cite{GregIan}.
+growth in the electric field energy norms but not in the $W$ norm \citep{GregIan}.
 Furthermore, it is $W$ that is conserved by the nonlinearities (recall
 the conservation equation (\ref{eq:dWdt})) and thus the $W$ norm that
 plays a role in determining bounds on the possibility of
 nonlinearly-sustained turbulence, as we will show in section
 \ref{sec:proof}.  For these reasons, we henceforth restrict our attention
-to the $W$ norm.}
+to the $W$ norm.
 
-\begin{figure}[h!]
+\begin{figure}
 % Figure generated with m20141119_01_plotGS2TransientAmplificationForPaper_figureA.m
-\includegraphics[width=3in]{m20141119_01_plotGS2TransientAmplificationForPaper_figureA_a.pdf}
-\includegraphics[width=3in]{m20150305_02_plotManyIndntclGS2TransntAmplifctnRuns.pdf}
+\centerline{
+%\includegraphics[width=3in]{m20141119_01_plotGS2TransientAmplificationForPaper_figureA_a.pdf}
+\includegraphics[width=3in]{fig1a.eps}
+%\includegraphics[width=3in]{m20150305_02_plotManyIndntclGS2TransntAmplifctnRuns.pdf}
+\includegraphics[width=3in]{fig1b.eps}
+}
 % Figure generated with m20141121_01_plotGS2TransientAmplificationForPaper.m
-\includegraphics[width=3in]{m20141121_01_plotGS2TransientAmplificationForPaper_figuresBC_c.pdf}
-\includegraphics[width=3in]{m20141121_01_plotGS2TransientAmplificationForPaper_figuresBC_d.pdf}
-\caption{(Color online) (a) Linear evolution for $L_s/L_n=300$, $\eta_i = \eta_e = 0$,
+\centerline{
+%\includegraphics[width=3in]{m20141121_01_plotGS2TransientAmplificationForPaper_figuresBC_c.pdf}
+\includegraphics[width=3in]{fig1c.eps}
+%\includegraphics[width=3in]{m20141121_01_plotGS2TransientAmplificationForPaper_figuresBC_d.pdf}
+\includegraphics[width=3in]{fig1d.eps}
+}
+\caption{(Colour online) (a) Linear evolution for $L_s/L_n=300$, $\eta_i = \eta_e = 0$,
 $\nuee = 0.05 v_i/L_n$, and $k_y \rho_i = 1$, illustrating transient amplification in three norms.
 The initial conditions are detailed in the main text.
-\changed{(b) Repeating the calculation 50 times, the results are always qualitatively similar.}
+(b) Repeating the calculation 50 times, the results are always qualitatively similar.
 (c) The amount of transient amplification may be defined relative to $t=0$ or relative
 to the minimum that occurs shortly thereafter.
 (d) The potential structure along a field line for this example.
@@ -454,14 +600,12 @@ The transiently growing structures in the presence of magnetic shear
 are related to the zero-shear eigenmodes.  To demonstrate this relationship, we consider a single
 $(k_x,k_y)$, and define an effective
 $k_{\perp}$ at each time for the transient fluctuation by
-\changed{
 \begin{equation}
 \label{eq:expectedKperp}
 \left< k_{\perp} \right>(t) = 
 \frac{\int dz\; k_{\perp}(z) \left| \Phi_{k_x,k_y}(t,z)\right|^2}
 {\int dz\; \left| \Phi_{k_x,k_y}(t,z)\right|^2}.
 \end{equation}
-}
 Similarly, we define an effective $|k_{||}|$ at each time for the transient structure
 by
 \begin{equation}
@@ -472,8 +616,7 @@ by
 where $\tilde\Phi_{k_x,k_y}$ is the Fourier transform of $\Phi_{k_x,k_y}$ in $z$. Using these effective values
 of $k_{\perp}$ and $k_{||}$, the zero-shear dispersion relation may be evaluated.
 The resulting growth rate 
-\changed{
-and real frequency can then be compared to the behavior of the finite-shear
+and real frequency can then be compared to the behaviour of the finite-shear
 transient structure.
 %$\gamma = (2W(t))^{-1} dW/dt$,
 An example of such a comparison is given in figure \ref{fig:comparingTransientTo0Shear_single},
@@ -496,39 +639,33 @@ itself an eigenmode, not until all points along the field line have had time to 
 to set up a new global finite-shear eigenmode.
 However, at each instant of the transient growth phase, the finite-shear structure grows at precisely the rate expected from the zero-shear
 instability at the average wavenumbers $\left< k_{\perp} \right>$ and $\left< \left| k_{||} \right| \right>$.
-}
 
-\begin{figure}[h!]
-\includegraphics[width=4in]{m20150222_01_plotGS2TransientAmplificationVs0ShearEigenmode.pdf}
-\caption{(Color online)
-\changed{
+
+\begin{figure}
+%\centerline{\includegraphics[width=4in]{m20150222_01_plotGS2TransientAmplificationVs0ShearEigenmode.pdf}}
+\centerline{\includegraphics[width=4in]{fig2.eps}}
+\caption{(Colour online)
 Comparison of the finite-shear transient from Figure \ref{fig:transientAmplification} to a
 zero-shear eigenmode, where $k_{\perp}$ and $k_{||}$ for the latter are chosen to be $\left<k_{\perp}\right>$ and $\left<|k_{||}|\right>$
 from the transient at $t=300 L_n/v_i$.
 It can be seen that near this time, the transient resembles a wave packet with roughly the same
 complex frequency as the zero-shear eigenmode.
 (The amplitude and phase of the eigenmode in (b) are arbitrary.)
-%from (\ref{eq:expectedKperp})-(\ref{eq:expectedKpar}).
-}
 \label{fig:comparingTransientTo0Shear_single}}
 \end{figure}
 
-\changed{
 To demonstrate this principle across a range of parameters,
 figure  \ref{fig:comparingTransientTo0Shear} demonstrates that the
 correspondence between the finite-shear transients and zero-shear eigenmodes
 is maintained throughout the evolution of the transient, for a range of
-values of magetic shear.}
-%This comparison is shown in figure \ref{fig:comparingTransientTo0Shear}.
+values of magetic shear.
 In this figure, we display 25 independent simulations of linear transients,
 varying $L_s/L_n$ between 20 and 300, and plotting the evolution of $\gamma = (2W(t))^{-1} dW/dt$ from the time
 of peak growth rate to the time at which the energy begins to decay.
 For all simulations shown, $k_y \rho_i = 2$ and $\nuee = 0.05 v_i/L_n$.
-\changed{
 Both $\left<|k_{||}|\right>$ and $\left< k_\perp \right>$ increase with time during the transient
 growth, corresponding to movement upward and rightward in figure \ref{fig:localDispersionRelation}.a.
 As a result, the effective zero-shear growth rate decreases over time.
-}
 For all transients we examined, there is very close agreement between the instantaneous growth rate of the transient
 and the `predicted' growth rate from the zero-shear dispersion relation.
 Thus, we can conclude that the transiently growing structures are closely related to the zero-shear
@@ -537,7 +674,7 @@ eigenmodes.
 %evolves (unlike the zero-shear case in which $k_{\perp}$ and $k_{||}$ are constants.)
 
 
-\begin{figure}[h!]
+\begin{figure}
 % Data for finite-shear transients were generated on Edison in
 % /global/scratch2/sd/landrema/20141121-01-coderunner-edison-transientAmplificationScans/aky2/
 %
@@ -545,8 +682,9 @@ eigenmodes.
 % /global/scratch2/sd/landrema/20150109-01-coderunner-edison-0shearUniversalInstability/vnewk_e_0p05
 %
 % Figure generated with m20150109_04_cmprngTransientGrowthRateTo0ShearForPaper.m
-\includegraphics[width=4in]{m20150109_04_cmprngTransientGrowthRateTo0ShearForPaper.pdf}
-\caption{(Color online)
+%\centerline{\includegraphics[width=4in]{m20150109_04_cmprngTransientGrowthRateTo0ShearForPaper.pdf}}
+\centerline{\includegraphics[width=4in]{fig3.eps}}
+\caption{(Colour online)
 Although a change from zero to small finite magnetic shear causes a fundamental change in the eigenvalues,
 (which change from unstable to decaying),
 the \emph{transient} finite-shear structures retain a similarity to the zero-shear modes.  For as shown here,
@@ -566,26 +704,25 @@ is well approximated by the approximate analytic dispersion relation (\ref{eq:ap
 that the transient structures, like the zero-shear eigenmodes,
 are driven by the combination of resonant electrons and the density gradient.
 
-\changed{ In contrast to the agreement shown in figure
-  \ref{fig:comparingTransientTo0Shear} for the amplification phase
-  following the maximum growth rate, we do not find such close
-  agreement between the zero-shear dispersion relation and the
-  finite-shear dynamics for very early times, before the maximum
-  growth rate occurs.  In this initial period, a single dominant wave
-  packet has not yet overtaken other fluctuations present in the
-  initial random noise.  We also do not see such close agreement
-  between the zero-shear and finite-shear behavior during the decay
-  phase of the latter, i.e. at large times.  The finite-shear decay
-  rate as $t \to \infty$ corresponds to an eigenvalue, and it was
-  established in previous work such as \cite{Ross,Tsang,Antonsen} that
-  the finite-shear eigenvalues are not continuously related to the
-  zero-shear eigenvalues.  In an eigenmode, points at all $z$ have a
-  coherent time-dependence.  Thus, this damping rate is determined by
-  a coherent interaction between points of different
-  $k_\perp(z)=k_y\sqrt{1+(z/L_s)^2}$, and between all $k_{||}$ Fourier
-  components.  This damping rate is thus not well approximated by the
-  zero-shear dispersion relation which assumes a single $k_\perp$ and
-  single $k_{||}$. }
+In contrast to the agreement shown in figure
+\ref{fig:comparingTransientTo0Shear} for the amplification phase
+following the maximum growth rate, we do not find such close agreement
+between the zero-shear dispersion relation and the finite-shear
+dynamics for very early times, before the maximum growth rate occurs.
+In this initial period, a single dominant wave packet has not yet
+overtaken other fluctuations present in the initial random noise.  We
+also do not see such close agreement between the zero-shear and
+finite-shear behaviour during the decay phase of the latter, i.e. at
+large times.  The finite-shear decay rate as $t \to \infty$
+corresponds to an eigenvalue, and it was established in previous work
+\citep{Ross,Tsang,Antonsen} that the finite-shear eigenvalues
+are not continuously related to the zero-shear eigenvalues.  In an
+eigenmode, points at all $z$ have a coherent time-dependence.  Thus,
+this damping rate is determined by a coherent interaction between
+points of different $k_\perp(z)=k_y\sqrt{1+(z/L_s)^2}$, and between
+all $k_{||}$ Fourier components.  This damping rate is thus not well
+approximated by the zero-shear dispersion relation which assumes a
+single $k_\perp$ and single $k_{||}$.
 
 Transient amplification is exponentially reduced by increasing magnetic shear,
 as illustrated in figure \ref{fig:transientAmplificationVsLsOverLn}.
@@ -606,7 +743,6 @@ The figure compares two measures of the duration of amplification, measuring to 
 or from the time of minimum $W$, akin to figure \ref{fig:transientAmplification}.b but in the time coordinate.
 These two measures of amplification duration display a similar linear trend.
 
-\changed{
 While figures \ref{fig:comparingTransientTo0Shear_single}-\ref{fig:comparingTransientTo0Shear}
 made the case that the transients were insensitive to shear in one sense,
 it is not a contradiction that the transients \emph{are} sensitive to shear
@@ -618,7 +754,6 @@ and $\left<|k_{||}|\right>(t)$ and the zero-shear dispersion relation, with
 no significant additional dependence on shear.  However,  $\left<k_{\perp}\right>(t)$
 and $\left<|k_{||}|\right>(t)$ are sensitive to shear, yielding the sensitivity
 of the overall $W(t)$ curve for each transient seen in figures \ref{fig:transientAmplificationVsLsOverLn}.a-b.
-}
 
 Figure \ref{fig:transientAmplificationVsKy} shows the dependence
 of the amplification factor on $k_y$ at fixed $L_s/L_n = 200$.
@@ -627,7 +762,7 @@ $1/\rho_i$.
 Results are shown for two values of collisionality,
 $\nuee L_n / v_i = 0.1$ and $0.5$.
 (When the collisionality is much smaller than these values,
-absolute linear instability is present \cite{usUniversalInstability}.)
+absolute linear instability is present \citep{usUniversalInstability}.)
 It can be seen that increasing collisionality tends to limit amplification
 at larger $k_y$ while having much less effect at smaller $k_y$.
 This kinetic problem is similar to conventional hydrodynamics in that for both cases, non-modal amplification
@@ -635,7 +770,7 @@ decreases with increasing collisional dissipation (associated with viscosity in 
 for the hydrodynamic case.)
 
 
-\begin{figure}[h!]
+\begin{figure}
 % Data computed on Edison in /global/scratch2/sd/landrema/20141121-01-coderunner-edison-transientAmplificationScans
 % Plot generated by first running
 % m20141121_02_plotTransientAmplificationLsOverLnScanForPaper.m on edison,
@@ -647,17 +782,20 @@ for the hydrodynamic case.)
 % m20140725_02_plotTransientAmplificationLsOverLnScanForPaper.m on edison,
 % and then running
 % m20140723_03_plotTransientAmplificationLsOverLnScanForPaper.m on my laptop.
-\includegraphics[width=3in]{m20141121_03_plotTransientAmplificationLsOverLnScanForPaper_a.pdf}
-\includegraphics[width=3in]{m20141121_03_plotTransientAmplificationLsOverLnScanForPaper_b.pdf}
-%\includegraphics[width=3in]{m20140723_03_plotTransientAmplificationLsOverLnScanForPaper.pdf}
-\caption{(Color online) The (a) number of $e$-foldings of transient amplification and (b)
+\centerline{
+%\includegraphics[width=3in]{m20141121_03_plotTransientAmplificationLsOverLnScanForPaper_a.pdf}
+%\includegraphics[width=3in]{m20141121_03_plotTransientAmplificationLsOverLnScanForPaper_b.pdf}
+\includegraphics[width=3in]{fig4a.eps}
+\includegraphics[width=3in]{fig4b.eps}
+}
+\caption{(Colour online) The (a) number of $e$-foldings of transient amplification and (b)
 duration of the amplification both scale with the magnetic shear length scale $L_s$,
 consistent with the appearance of absolute instability in the limit of vanishing shear ($L_s \to \infty$).
 Parameters used are $k_y \rho_i = 2$ and $\nuee = 0.05 v_i / L_n$.
 \label{fig:transientAmplificationVsLsOverLn}}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}
 % Data computed on Edison in /global/scratch2/sd/landrema/20141121-02-coderunner-edison-transientAmplificationKyScans
 % Plot generated by first running
 % m20140725_01_plotTransientAmplificationKyScanForPaper.m on edison,
@@ -669,40 +807,41 @@ Parameters used are $k_y \rho_i = 2$ and $\nuee = 0.05 v_i / L_n$.
 % m20140725_01_plotTransientAmplificationKyScanForPaper.m on edison,
 % and then running
 % m20140728_01_plotTransientAmplificationKyScans.m on my laptop.
-\includegraphics[width=3in]{m20141122_01_plotTransientAmplificationKyScans.pdf}
-\includegraphics[width=3in]{m20141122_01_plotTransientAmplificationKyScans_times.pdf}
-%\includegraphics[width=3in]{m20140728_01_plotTransientAmplificationKyScans.pdf}
-\caption{(Color online) Transient amplification can be observed
+\centerline{
+%\includegraphics[width=3in]{m20141122_01_plotTransientAmplificationKyScans.pdf}
+%\includegraphics[width=3in]{m20141122_01_plotTransientAmplificationKyScans_times.pdf}
+\includegraphics[width=3in]{fig5a.eps}
+\includegraphics[width=3in]{fig5b.eps}
+}
+\caption{(Colour online) Transient amplification can be observed
 for a range of $k_y$ surrounding $1/\rho_i$.  For this figure, $L_s/L_n=200$.
 The two collisionalities shown are $\nuee L_n / v_i = 0.1$ and $0.5$.
 \label{fig:transientAmplificationVsKy}}
 \end{figure}
 
-\changed{In the context of sheared flows in neutral fluids, a
-  relationship between transient growth and eigenvalue sensitivity has
-  been formally proved using the notion of a pseudospectrum
-  \cite{ReddyHenningson,TrefethenSubcritical,TrefethenEmbree}. The
-  $\epsilon$-pseudospectrum of a linear operator can be defined as the
-  union of the sets of eigenvalues obtained when the operator is
-  perturbed by any other operator of norm $\le \epsilon$, providing a
-  precise notion of the sensitivity of eigenvalues.  One can
-  rigorously bound the amount of possible transient growth by the
-  extent of the pseudospectrum into the unstable half of the complex
-  plane \cite{ReddyHenningson} (eq (12) of
-  \cite{TrefethenSubcritical}.)  However, for the universal
-  instability, it is not clear that changing the magnetic shear from 0
-  to a small finite value has the form of the operator perturbation
-  used to define the pseudospectrum.  The reason is that the $z$
-  domain is infinite, and for any nonzero shear, there is always some
-  $z$ for which the argument of $J_0$ is changed significantly
-  compared to the zero-shear case.  Indeed, all evidence suggests that
-  when the shear changes from 0 to any small finite value, the
-  eigenvalues (for a range of ky) change from unstable to stable
-  discontinuously rather than continuously \cite{Ross,Tsang}.  Thus,
-  it may or may not be possible to understand the role of magnetic shear
-  in the universal instability using the formal theory of
-  pseudospectra, and we leave this careful mathematical analysis for
-  future work.  }
+In the context of sheared flows in neutral fluids, a relationship
+between transient growth and eigenvalue sensitivity has been formally
+proved using the notion of a pseudospectrum
+\citep{ReddyHenningson,TrefethenSubcritical,TrefethenEmbree}. The
+$\epsilon$-pseudospectrum of a linear operator can be defined as the
+union of the sets of eigenvalues obtained when the operator is
+perturbed by any other operator of norm $\le \epsilon$, providing a
+precise notion of the sensitivity of eigenvalues.  One can rigorously
+bound the amount of possible transient growth by the extent of the
+pseudospectrum into the unstable half of the complex plane
+\citep{ReddyHenningson}, summarized in equation (12) of \citet{TrefethenSubcritical}.
+However, for the universal instability, it is not clear that changing
+the magnetic shear from 0 to a small finite value has the form of the
+operator perturbation used to define the pseudospectrum.  The reason
+is that the $z$ domain is infinite, and for any nonzero shear, there
+is always some $z$ for which the argument of $J_0$ is changed
+significantly compared to the zero-shear case.  Indeed, all evidence
+suggests that when the shear changes from 0 to any small finite value,
+the eigenvalues (for a range of $k_y$) change from unstable to stable
+discontinuously rather than continuously \citep{Ross,Tsang}.  Thus, it
+may or may not be possible to understand the role of magnetic shear in
+the universal instability using the formal theory of pseudospectra,
+and we leave this careful mathematical analysis for future work.
 
 
 \section{Turbulence}
@@ -719,9 +858,9 @@ turbulence cannot be sustained indefinitely (though it may persist for a finite 
 Note that $L_s/L_n=20$ is also approximately the maximum shear
 in figure \ref{fig:transientAmplificationVsLsOverLn} for which transient linear amplification is observed
 for random initial conditions.
-(While absolute linear instability was found in \cite{usUniversalInstability} for $L_s/L_n \ge 17$ in the limit of vanishing collisionality, here the finite collisionality is enough to suppress this linear instability.)
+(While absolute linear instability was found in \citet{usUniversalInstability} for $L_s/L_n \ge 17$ in the limit of vanishing collisionality, here the finite collisionality is enough to suppress this linear instability.)
 Before presenting nonlinear simulations,
-we first illustrate the linear behavior of the system using all the physical and numerical
+we first illustrate the linear behaviour of the system using all the physical and numerical
 parameters that will be used for the nonlinear runs.  Figure \ref{fig:linearBox} shows the time evolution of
 $W$ for all the dealiased $k_y$ modes that will be
 used for nonlinear simulations, including twist-and-shift boundary conditions,
@@ -764,7 +903,7 @@ Linear modes with $k_y=0$ and $\partial/\partial z=0$ are damped only by collisi
 Collisions introduce damping of these $k_y=0$ modes, with a damping rate that increases with $k_x^2$ due to the classical transport terms in the gyroaveraged collision operator.
 
 
-\begin{figure}[h!]
+\begin{figure}
 % Dataset is /global/scratch2/sd/landrema/20141112-01-coderunner-edison-subcritical-box-lowLsOverLn/v/id_59
 % Figure was generated by first running
 % /global/u2/l/landrema/MATLAB/m20141124_01_processGS2_linearBoxFigureForPaper.m on edison,
@@ -777,12 +916,12 @@ Collisions introduce damping of these $k_y=0$ modes, with a damping rate that in
 % /global/u2/l/landrema/MATLAB/m20140804_02_extractPhi2ByKyFromGS2_linearBox.m on edison,
 % then running
 % m20140804_03_plotPhi2VsTimeForPaper_linearBox.m on my laptop
-\includegraphics[width=6.5in]{m20141126_01_plotWVsTimeForPaper_linearBox.pdf}
-%\includegraphics[width=6.5in]{m20140804_03_plotPhi2VsTimeForPaper_linearBox.pdf}
-\caption{(Color online)
+%\centerline{\includegraphics[width=6.5in]{m20141126_01_plotWVsTimeForPaper_linearBox.pdf}}
+\centerline{\includegraphics[width=6in]{fig6.eps}}
+\caption{(Colour online)
 Linear dynamics for the parameters used in the
 nonlinear simulations of figure \ref{fig:amplitudeDependence}.
-The large-$t$ behavior demonstrates there is no absolute linear instability.
+The large-$t$ behaviour demonstrates there is no absolute linear instability.
 A small amount of transient amplification can be seen.
 \label{fig:linearBox}}
 \end{figure}
@@ -800,19 +939,18 @@ with the perpendicular $\vect{E}\times\vect{B}$ speed,
 thereby requiring recomputation of the implicit time-advance operator.
 Another method for initiating the nonlinear instability is to begin with a sufficient
 temperature gradient to bring about linear instability, and then to reduce the temperature gradient
-once the turbulence reaches a sufficient amplitude \cite{Drake}.
+once the turbulence reaches a sufficient amplitude \citep{Drake}.
 A third effective method, the one used in figure \ref{fig:amplitudeDependence},
 is to initialize with one of the least-damped linear eigenmodes scaled up to appropriate amplitude, with noise in the other modes.  
 We find this method to be particularly convenient since variation in the stable time step
 is minimized.
-\changed{
 (In both simulations shown in figure  \ref{fig:amplitudeDependence}, the $k_y \rho_i=0$ Fourier component is initialized to 0,
 but this component (and the $k_y \rho_i=\pm 0.2$ components) grow up quickly for the following reason. Since observable quantities are real, there is a large $k_y \rho_i=-0.1$
 Fourier component present in the initial condition which is the complex conjugate of the large $k_y \rho_i=+0.1$ component shown,
 and these two components interact nonlinearly to drive components at the sum and difference wave numbers.)
-}
 
-\begin{figure}[h!]
+
+\begin{figure}
 % Datasets are in /global/scratch2/sd/landrema/20141112-01-coderunner-edison-subcritical-box-lowLsOverLn
 % runs 54,55,58,72
 % Figure is produced by first running
@@ -827,9 +965,9 @@ and these two components interact nonlinearly to drive components at the sum and
 % m20140804_03_extractPhi2ByKyFromGS2_amplitudeDependence.m on edison,
 % then running
 % m20140804_05_plotPhi2VsTimeForPaper_amplitudeDependence.m on my laptop.
-\includegraphics[width=6.5in]{m20141125_02_WVsTimeForPaper_amplitudeDependence.pdf}
-%\includegraphics[width=6.5in]{m20140804_05_plotPhi2VsTimeForPaper_amplitudeDependence.pdf}
-\caption{(Color online)
+%\centerline{\includegraphics[width=6.5in]{m20141125_02_WVsTimeForPaper_amplitudeDependence.pdf}}
+\centerline{\includegraphics[width=6.5in]{fig7.eps}}
+\caption{(Colour online)
 Simulations for exactly the same physical and numerical parameters as the decaying
 linear simulation in figure (\ref{fig:linearBox}), but now including nonlinearity and varying the
 initial amplitude of the $k_y=0.1$ component.
@@ -846,7 +984,7 @@ dotted line.  All modes eventually decay.
 However some modes
 display a modest amount ($\lesssim 3\times$) of transient amplification before decaying.
 
-\begin{figure}[h!]
+\begin{figure}
 % Simulations in /global/scratch2/sd/landrema/20141112-01-coderunner-edison-subcritical-box-lowLsOverLn
 % Runs: 58 (nonlinear) and 61 (linear restart)
 % Figure generated by first running
@@ -860,9 +998,9 @@ display a modest amount ($\lesssim 3\times$) of transient amplification before d
 % m20140806_01_extractPhi2ByKyFromGS2_linearRestart.m on edison,
 % then running
 % m20140807_02_plotPhi2VsTimeForPaper_linearRestart.m on my laptop.
-\includegraphics[width=6.5in]{m20141126_02_plotWVsTimeForPaper_linearRestart.pdf}
-%\includegraphics[width=6.5in]{m20140807_02_plotPhi2VsTimeForPaper_linearRestart.pdf}
-\caption{(Color online)
+%\centerline{\includegraphics[width=6.5in]{m20141126_02_plotWVsTimeForPaper_linearRestart.pdf}}
+\centerline{\includegraphics[width=6.5in]{fig8.eps}}
+\caption{(Colour online)
 Demonstration of the concepts in section \ref{sec:proof}.
 Curves show free energy in the 2D modes with $k_x=0$ (including intervals linked by
 the twist-and-shift parallel boundary condition) for various $k_y$.
@@ -887,11 +1025,12 @@ the particle flux is normalized by $(\rho_i / L_n)^2 n v_i$.
 Converting to dimensional units for a deuterium plasma, we obtain the following estimate for the turbulent particle diffusivity:
 $D \approx \left( 0.4 \mathrm{ \;m^2/s}\right)
 \left(T / 500 \mathrm{\;eV}\right)^{3/2}
+\times
 \left(B/2\mathrm{\;T}\right)^{-2} \left( L_n / 1 \mathrm{\;cm}\right)^{-1}$.
 This magnitude of diffusion coefficient may be large enough to be of interest experimentally.
 A larger diffusion coefficient is obtained if $L_s/L_n$ is increased.
 
-\begin{figure}[h!]
+\begin{figure}
 % Runs on edison in
 % /global/scratch2/sd/landrema/20141112-01-coderunner-edison-subcritical-box-lowLsOverLn
 % Figure generated by first running
@@ -907,10 +1046,9 @@ A larger diffusion coefficient is obtained if $L_s/L_n$ is increased.
 % m20140807_01_plotGS2_extractFluxesVsTimeForPaper.m on edison,
 % then running
 % m20140807_01_plotFluxesVsTimeForPaper.m on my laptop.
-\includegraphics[width=4in]{m20141210_01_plotGs2FluxesVsTimeForPaper.pdf}
-%\includegraphics[width=3in]{m20140807_01_plotFluxesVsTimeForPaper.pdf}
-%\includegraphics[width=3in]{fluxes.png}
-\caption{(Color online)
+%\centerline{\includegraphics[width=4in]{m20141210_01_plotGs2FluxesVsTimeForPaper.pdf}}
+\centerline{\includegraphics[width=4in]{fig9.eps}}
+\caption{(Colour online)
 Fluxes for the simulation of Figure (\ref{fig:amplitudeDependence}).a with  $\nuee L_n / v_i = 0.05$ and
 $L_s/L_n=20$, approximately the maximum shear at which turbulence can be sustained at this collisionality.
 Even in the absence of equilibrium temperature gradients, nonzero average ion and electron heat fluxes
@@ -918,44 +1056,53 @@ are obtained.
 \label{fig:fluxes}}
 \end{figure}
 
-\changed{
-As mentioned earlier, for certain values of shear, collisionality, and initial perturbation amplitude,
-a third type of behavior was sometimes observed besides the two outcomes shown in figure \ref{fig:amplitudeDependence}:
-turbulence resembling figure  \ref{fig:amplitudeDependence}.a can persist for a finite time but eventually decay linearly
-as in figure  \ref{fig:amplitudeDependence}.b.
-This finite-lifetime plasma turbulence is reminiscent of turbulent puffs in neutral (Navier-Stokes) pipe flow.
-In neutral pipe flow it has been found \cite{Hof2006, Tel} that in fact
-the lifetime of turbulence puffs does not become infinite at a critical value of the relevant physical parameter (Reynolds number) but rather
-the lifetime varies with Reynolds number exponentially, so the turbulence lifetime can become longer than any reasonable observation
-time.
-An interesting open question (which we leave for future research) is whether a similar scaling
-of the turbulence lifetime may be present in the plasma system we consider here.
-}
+As mentioned earlier, for certain values of shear, collisionality, and
+initial perturbation amplitude, a third type of behaviour was sometimes
+observed besides the two outcomes shown in figure
+\ref{fig:amplitudeDependence}: turbulence resembling figure
+\ref{fig:amplitudeDependence}.a can persist for a finite time but
+eventually decay linearly as in figure
+\ref{fig:amplitudeDependence}.b.  This finite-lifetime plasma
+turbulence is reminiscent of turbulent puffs in neutral
+(Navier-Stokes) pipe flow.  In neutral pipe flow it has been found
+\citep{Hof2006, Tel} that in fact the lifetime of turbulence puffs does
+not become infinite at a critical value of the relevant physical
+parameter (Reynolds number) but rather the lifetime varies with
+Reynolds number exponentially, so the turbulence lifetime can become
+longer than any reasonable observation time.  An interesting open
+question (which we leave for future research) is whether a similar
+scaling of the turbulence lifetime may be present in the plasma system
+we consider here.
+
 
 \section{Turbulence implies transient amplification of typical states}
 \label{sec:proof}
 
-It seems plausible that the previous two sections are related,
-that a connection exists between transient linear amplification and sustained nonlinear turbulence.
-Let us now prove this relationship rigorously.
-Here we present two such arguments,
-both of which yield the conclusion that non-modal amplification is a necessary condition
-for sustained turbulence.  One argument for the case of hydrodynamics
-was given in \cite{DelSoleNecessity} and section 4 of \cite{DelSoleSurvey},
-and below we adapt this reasoning to gyrokinetics.  Before we do so, we give an alternative
-argument that relies less on linear algebra.
-For this discussion, it is useful to define a ``2D mode'' to be any structure with given $k_x$ and $k_y$,
-but with no restriction on the $z$ dependence (so the structure need not be an eigenmode).
+It seems plausible that the previous two sections are related, that a
+connection exists between transient linear amplification and sustained
+nonlinear turbulence.  Let us now prove this relationship rigorously.
+Here we present two such arguments, both of which yield the conclusion
+that non-modal amplification is a necessary condition for sustained
+turbulence.  One argument for the case of hydrodynamics was given in
+\citet{DelSoleNecessity} and section 4 of \citet{DelSoleSurvey}, and
+below we adapt this reasoning to gyrokinetics.  Before we do so, we
+give an alternative argument that relies less on linear algebra.  For
+this discussion, it is useful to define a ``2D mode'' to be any
+structure with given $k_x$ and $k_y$, but with no restriction on the
+$z$ dependence (so the structure need not be an eigenmode).
 
-{\it Statement 1:} Consider a turbulent solution of the nonlinear gyrokinetic system (\ref{eq:gke})-(\ref{eq:qn}),
+\begin{statement}
+Consider a turbulent solution of the nonlinear gyrokinetic system (\ref{eq:gke})-(\ref{eq:qn}),
 i.e. a solution for which $W$ does not decay to zero at large $t$.
-Choose any time $t_0$ at which the free energy satisfies $dW/dt>0$.
+Choose any time $t_0$ at which the free energy satisfies $dW/dt>0$;
+such times must occur in steady turbulence as $W$ fluctuates about its mean value.
 Suppose at $t_0$ we turn off the nonlinear term
 and re-evolve the system in time, as in figure \ref{fig:linearRestart}.
 Then at least one 2D mode must grow in the $W$ norm
 for some time following $t_0$, i.e. there must be transient linear amplification.
+\end{statement}
 
-{\it Proof:}
+\begin{proof}
 Recall that (\ref{eq:dWdt}) is a moment of both the nonlinear and linear dynamical equations.
 When the nonlinear term is turned off at $t_0$, $S(h_i,h_e)$ does not immediately change, because
 the system state does not immediately change. Therefore, $dW/dt$ must vary \emph{continuously}
@@ -965,6 +1112,7 @@ Recall $W$ is a sum of positive contributions (\ref{eq:Wk}) from each 2D mode:
 $W = \sum_{k_x,k_y} W_{k_x,k_y}$.
 Therefore $dW_{k_x,k_y}/dt$ must be positive in the linear dynamics for at least one 2D mode,
 so this mode must be growing transiently in the $W$ norm.
+\end{proof}
 
 Roughly speaking, the upshot of this argument is that we should not be surprised that there is transient amplification
 after the nonlinear term is turned off in figure (\ref{fig:linearRestart}).
@@ -974,31 +1122,34 @@ for turbulence (in the absence of linear instability) is that typical states of 
 can be transiently amplified. Furthermore, the energy growth in the 2D modes that are amplified
 must be sufficient to balance the energy decay from the damped 2D modes.
 
-\changed{ We note that while $dW/dt$ is continuous when the nonlinear term
-  is turned off, each $dW_{k_x,k_y}/dt$ is generally not. The reason is that in order to annihilate the
-  nonlinear term in the derivation of (\ref{eq:dWdt})-(\ref{eq:freeEnergySources}), it is necessary to
-  integrate over $x$ and $y$, i.e. sum over $k_x$ and $k_y$. Thus, while (\ref{eq:dWdt}) is
-  identical for the nonlinear and linear dynamics, the analogous
-  equation for $dW_{k_x,k_y}/dt$ is different for the nonlinear and linear
-  dynamics. Removing the nonlinear term therefore causes a
-  discontinuous change in $dW_{k_x,k_y}/dt$.
-}
+We note that while $dW/dt$ is continuous when the nonlinear term is
+turned off, each $dW_{k_x,k_y}/dt$ is generally not. The reason is
+that in order to annihilate the nonlinear term in the derivation of
+(\ref{eq:dWdt})-(\ref{eq:freeEnergySources}), it is necessary to
+integrate over $x$ and $y$, i.e. sum over $k_x$ and $k_y$. Thus, while
+(\ref{eq:dWdt}) is identical for the nonlinear and linear dynamics,
+the analogous equation for $dW_{k_x,k_y}/dt$ is different for the
+nonlinear and linear dynamics. Removing the nonlinear term therefore
+causes a discontinuous change in $dW_{k_x,k_y}/dt$.
 
 Next, we present a second argument for the necessity of transient amplification.
-This argument is based on linear algebra and closely follows \cite{DelSoleNecessity}.
+This argument is based on linear algebra and closely follows \citet{DelSoleNecessity}.
 For this second approach, we let $\vect{h}$ denote
 a column vector that specifies the state of the system $\{h_i,h_e\}$ in some convenient basis.
 For example, $\vect{h}$ could represent the array of values specifying the distribution function in a code.
 
-{\it Statement 2:} Given a set of physical parameters for which
+\begin{statement}
+Given a set of physical parameters for which
 the nonlinear gyrokinetic system (\ref{eq:gke})-(\ref{eq:qn})
 permits statistically steady turbulence,
 there exists at least one state $\vect{h}_0$ such that
 (1) $dW/dt>0$ if $\vect{h} = \vect{h}_0$, and
 (2) the squared projection of the turbulent state $\vect{h}(t)$
 onto $\vect{h}_0$, defined below, has a non-zero average.
+\end{statement}
 
-{\it Proof:}
+%{\it Proof:}
+\begin{proof}
 Let $\vect{L}$ denote the time-independent linear operator associated with (\ref{eq:gke})-(\ref{eq:qn})
 in the absence of the nonlinear term,
 so the linearized (\ref{eq:gke})-(\ref{eq:qn}) can be written
@@ -1052,6 +1203,7 @@ then there must be at least one positive eigenvalue $\lambda_{j_0}$ with an asso
 average weight $\left< \left| a_{j_0}(t) \right|^2 \right>$. Considering the associated
 $\vect{u}_{j_0}$ in (\ref{eq:dWdt2}), then this state $\vect{u}_{j_0}$ must give positive $dW/dt$,
 proving statement 2.
+\end{proof}
 
 Thus, we have showed in two ways that transient linear amplification
 is a necessary condition for turbulence in the associated nonlinear
@@ -1076,51 +1228,51 @@ such as $\int d^3r \left| \Phi \right|^2$ in which one might choose to measure t
 (In fact for any operator with damped eigenmodes,
 even if transient amplification exists in one norm,
 another norm always exists in which transient amplification is impossible.
-The sum of squared eigenmode coefficients is such a norm \cite{FarrellIoannou1993}.)
+The sum of squared eigenmode coefficients is such a norm \citep{FarrellIoannou1993}.)
 
 
 While the arguments here relied on the gyrokinetic conservation law (\ref{eq:dWdt}), the same reasoning may be applied to
 other models and systems in which an energy conservation equation holds. For example,
-eq (6) in Ref. \cite{Drake} gives the appropriate conservation law for the fluid model
+eq (6) in \citet{Drake} gives the appropriate conservation law for the fluid model
 in that work, and the first line of (6) gives the associated norm to use in place of $W$.
 
 
 \section{Discussion and conclusions}
 \label{sec:conclusions}
 
-The ``universal mode'' system (slab geometry with a density gradient, electrostatic,
-no sheared equilibrium flow, and weak temperature gradients)
-is known to have a dramatic change in linearly stability
-as the magnetic shear is raised from zero to small finite values
-\cite{Ross, Tsang, Antonsen,usUniversalInstability}.
-As the eigenvalues are so sensitive to magnetic shear,
-we might expect traditional modal analysis to
-give a misleading picture of typical behavior,
-as with other systems that have sensitive eigenvalues \cite{TrefethenEmbree}.
-Indeed, here we have demonstrated that significant
-transient linear amplification is possible in the drift wave system even when
-all eigenmodes are decaying.
-As shown in figure \ref{fig:comparingTransientTo0Shear},
-the transient structures grow at the zero-shear
-growth rate, when evaluated at the dominant $k_{\perp}$ and $k_{||}$ at that instant.
-We have demonstrated that the amount and duration of amplification scale
-with the magnetic shear length $L_s$, so these quantities naturally become
-unbounded in the limit of vanishing shear.
-The non-modal amplification also decreases with increasing collisionality,
-particularly at the shortest perpendicular wavelengths,
-and the amplification tends to be largest at wavelengths near $k_y \rho_i \sim 1-2$.
-In contrast to more famous examples of non-modal amplification
-from hydrodynamics \cite{TrefethenSubcritical}, and to some recent examples from plasma physics \cite{Newton, Alex, BarnesRotation, EdmundPRL},
-the amplification in the plasma drift wave system here
-does not depend on sheared equilibrium flow.
+The ``universal mode'' system (slab geometry with a density gradient,
+electrostatic, no sheared equilibrium flow, and weak temperature
+gradients) is known to have a dramatic change in linearly stability as
+the magnetic shear is raised from zero to small finite values
+\citep{Ross, Tsang, Antonsen,usUniversalInstability}.  As the
+eigenvalues are so sensitive to magnetic shear, we might expect
+traditional modal analysis to give a misleading picture of typical
+behaviour, as with other systems that have sensitive eigenvalues
+\citep{TrefethenEmbree}.  Indeed, here we have demonstrated that
+significant transient linear amplification is possible in the drift
+wave system even when all eigenmodes are decaying.  As shown in figure
+\ref{fig:comparingTransientTo0Shear}, the transient structures grow at
+the zero-shear growth rate, when evaluated at the dominant $k_{\perp}$
+and $k_{||}$ at that instant.  We have demonstrated that the amount
+and duration of amplification scale with the magnetic shear length
+$L_s$, so these quantities naturally become unbounded in the limit of
+vanishing shear.  The non-modal amplification also decreases with
+increasing collisionality, particularly at the shortest perpendicular
+wavelengths, and the amplification tends to be largest at wavelengths
+near $k_y \rho_i \sim 1-2$.  In contrast to more famous examples of
+non-modal amplification from hydrodynamics
+\citep{TrefethenSubcritical}, and to some recent examples from plasma
+physics \citep{Newton, EdmundPRL, BarnesRotation, Alex}, the
+amplification in the plasma drift wave system here does not depend on
+sheared equilibrium flow.
 
 We have also demonstrated using nonlinear gyrokinetic simulations
 that sustained turbulence is possible in this system
 even when all linear modes are damped.
 This phenomenon had been seen previously
-in fluid models \cite{Scott1, Scott2, Drake}.
+in fluid models \citep{Scott1, Scott2, Drake}.
 This phenomenon, clearly visible in figure \ref{fig:amplitudeDependence},
-is opposite to the ``Dimits shift'' \cite{Dimits} seen at different physical parameters,
+is opposite to the ``Dimits shift'' \citep{Dimits} seen at different physical parameters,
 in which nonlinear fluctuations
 are suppressed despite the presence of linear instability.
 
@@ -1146,7 +1298,7 @@ This feature makes the present system an interesting case study of subcritical t
 
 Note that the transient linear process emphasized here and secondary instability are not mutually
 exclusive. Both are required to support turbulence.
-Some form of secondary instability (as discussed in \cite{Drake}) must be present to transfer energy out of the transiently growing linear
+Some form of secondary instability (as discussed in \citet{Drake}) must be present to transfer energy out of the transiently growing linear
 structures before these structures begin to decay substantially. However, nonlinear processes cannot
 directly contribute to the system's free energy $W$, due to the annihilation of the nonlinear term
 in the derivation of (\ref{eq:dWdt}).
@@ -1157,19 +1309,24 @@ and electromagnetic fluctuations.
 Therefore, further work is required to determine how relevant the nonlinear turbulence considered here
 is for realistic experimental parameters.  However, we at least conclude that linear stability
 need not preclude the possibility of significant turbulent particle and energy fluxes.
-%and that nonlinear simulations should sometimes be initialized at finite amplitude to examine this possibility.
 
-\begin{acknowledgments}
-This material is based upon work supported by the
-U.S. Department of Energy, Office of Fusion Energy Science,
-under Award Numbers DEFG0293ER54197 and DEFC0208ER54964,
-and the SciDAC Center for the Study of Plasma Microturbulence.
-Computations were performed on the Edison system at
-the National Energy Research Scientific Computing Center, a DOE Office of Science User Facility supported by the Office of Science of the U.S. Department of Energy under Contract No. DE-AC02-05CH11231.
-Conversations with
-Tom Antonsen, Michael Barnes, Greg Colyer, James Drake, Edmund Highcock, Greg Hammett, and Adil Hassam
-are gratefully acknowledged.
-\end{acknowledgments}
+%Acknowledgements should be included at the end of the paper, before
+%the References section or any appendicies, and should be a separate
+%paragraph without a heading. Several anonymous individuals are
+%thanked for contributions to these instructions.
+
+%\begin{acknowledgments}
+This material is based upon work supported by the U.S. Department of
+Energy, Office of Fusion Energy Science, under Award Numbers
+DE-FG02-93ER54197 and DE-FC02-08ER54964, and the SciDAC Center for the
+Study of Plasma Microturbulence.  Computations were performed on the
+Edison system at the National Energy Research Scientific Computing
+Center, a DOE Office of Science User Facility supported by the Office
+of Science of the U.S. Department of Energy under Contract
+No. DE-AC02-05CH11231.  Conversations with Tom Antonsen, Michael
+Barnes, Greg Colyer, James Drake, Edmund Highcock, Greg Hammett, and
+Adil Hassam are gratefully acknowledged.
+%\end{acknowledgments}
 
 
 \appendix
@@ -1207,16 +1364,17 @@ We take $\eta_i = \eta_e = 0$
 so it is certain that the ion-temperature-gradient (ITG) and electron-temperature-gradient (ETG)
 modes are suppressed.
 Figure \ref{fig:localDispersionRelation} was generated by applying nonlinear root-finding to (\ref{eq:dispersionRelation}),
-verifying the solution agreed with initial-value gs2 simulations for several values of $k_{||}$ and $k_{\perp}$.
+verifying the solution agreed with initial-value gs2 simulations for various values of $k_{||}$ and $k_{\perp}$.
 It can be seen that absolute linear instability exists for sufficiently small values of $\left|k_{||}\right|$
 when $k_{\perp} \rho_i < 40$.
 
 
-\begin{figure}[h!]
+\begin{figure}
 % Figure generated with m20141214_01_plotUniversalModeDispersionRelationForPaper.m
 %\includegraphics[width=6in]{localLinearDispersionRelation.png}
-\includegraphics[width=6in]{m20141214_01_plotUniversalModeDispersionRelationForPaper.pdf}
-\caption{(Color online) Solution of the linear dispersion relation in the zero-shear (local) limit, i.e. the
+%\centerline{\includegraphics[width=6in]{m20141214_01_plotUniversalModeDispersionRelationForPaper.pdf}}
+\centerline{\includegraphics[width=6in]{fig10.eps}}
+\caption{(Colour online) Solution of the linear dispersion relation in the zero-shear (local) limit, i.e. the
 root of (\ref{eq:dispersionRelation}) with largest imaginary part, for $\eta_i = \eta_e = 0$,
 $T_e = T_i$, and $m_i = 3672 m_e$.
 The (a) imaginary and (b)
@@ -1235,6 +1393,8 @@ one finds
 \left( \frac{T_e}{T_i} + 1 + i \sqrt{\pi}\frac{\omega_*}{|k_{||}| v_e}\right).
 \end{equation}
 The imaginary part of $\omega$, proportional to  $Z_e \approx i\sqrt{\pi}$, evidently arises due to the electron resonance.
+
+\bibliographystyle{jpp}
 
 \bibliography{universalModeTurbulencePaper}
 
